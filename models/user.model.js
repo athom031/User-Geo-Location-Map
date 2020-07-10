@@ -15,36 +15,87 @@ var userSchema = new mongoose.Schema({
     fullName: {
         //as of rn name doesn't have to follow any convention (first name/last name etc)
         type: String,
-        required: 'Full name can\'t be empty'
+        required: 'Name is required.'
     },
-    //should probably have a username instead of email that needs to be unique
-    email: {
+    userName: {
         type: String,
-        required: 'email can\'t be empty',
+        required: 'Username is required.',
         unique: true
+    },
+    address: {
+        type: String,
+        required: 'Address is required. Must be US.'
     },
     password: {
         type: String,
-        required: 'Password can\'t be empty',
-        minlength : [8, "Password must be atleast 8 characters long"]
-        //add needs atleast one capital letter?
+        required: "Password is required."
+        //lets try validate method -> email
+        //minlength : [8, "Password must be atleast 8 characters long"]
+    },
+    confPassword: {
+        type:String,
+        required: "Please confirm password"
     },
     saltSecret: String
 });
 
 
-//validation for email
-userSchema.path('email').validate((val) => {
-    emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return emailRegex.test(val);
-}, 'Invalid e-mail.');
+//validation for password
+userSchema.path('password').validate((val) => {
+    if(val.length < 6 || val.toLowerCase() === val) {
+        return false;
+    }
+    else {
+        //console.log(val);
+        return true;
+    }
+}, 'Password must be min 6 characters and have atleast 1 uppercase letter and 1 non-letter');
 
+/*
+userSchema.path('confPassword').validate((val) => {
+    console.log(this.password);
+    console.log(this.confPasword);
+    return true;
+    
+    let pass = ' ';
+    userSchema.path('password').validate((val) => {
+        pass = val;
+        console.log("hope this works")
+        console.log(val)
+        return true;
+    });
+    console.log("test:")
+    console.log(pass);
+
+    if(true){
+        return false;
+    }
+    else {
+        return true;
+    }
+
+}, 'Typed Passwords do not match');
+*/
 
 //preevent from bcrypt
 //invoked before save operation and generates saltSecretet in User
 userSchema.pre('save', function (next) {
+    //to check if passwords match
+    //will only work when passwords assigned 
+        //need to be in the invoke before save operation
+    userSchema.path('confPassword').validate((val) => {
+        if(this.password != this.confPassword) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }, 'Typed Passwords do not match');
+
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (err, hash) => {
+            //console.log(this.password);
+            //console.log(this.confPassword);
             this.password = hash;
             this.saltSecret = salt;
             next();
