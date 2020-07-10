@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
+//create mongoose model for users data in mongo db
+
 /*
-things to implement:
-user data point->
-Name done
-Password done -> check length, capital letter/nonletter?
-Take address and use geocoding api to check if it is a us address
+TODO: password/confpassword
+TODO: address US check
 */
 
 const bcrypt = require('bcryptjs');
-//needed to encrypt password and keep secret in database 
+//needed to encrypt password and keep secret in database
+
 var userSchema = new mongoose.Schema({
-    //none are optional -> data must be inputted
+    //none are optional -> data must be inputed
     fullName: {
         //as of rn name doesn't have to follow any convention (first name/last name etc)
         type: String,
@@ -20,11 +20,13 @@ var userSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: 'Username is required.',
+        //should be unique, people can have same name/address/password
         unique: true
     },
     address: {
         type: String,
         required: 'Address is required. Must be US.'
+        //TODO: eventually want a check for US ADDRESS
     },
     password: {
         type: String,
@@ -32,75 +34,38 @@ var userSchema = new mongoose.Schema({
         //lets try validate method -> email
         //minlength : [8, "Password must be atleast 8 characters long"]
     },
+    saltSecret: String, //not assigned in client side
     confPassword: {
         type:String,
         required: "Please confirm password"
-    },
-    saltSecret: String
+    }
+    //saltSec: String //not assigned on client side (potentially not needed why not just set same val after check)
 });
 
 
 //validation for password
 userSchema.path('password').validate((val) => {
-    if(val.length < 6 || val.toLowerCase() === val) {
+    if(val.length < 6 || val.toLowerCase() === val || /^[a-zA-Z]+$/.test(val)) {
         return false;
     }
     else {
-        //console.log(val);
         return true;
     }
 }, 'Password must be min 6 characters and have atleast 1 uppercase letter and 1 non-letter');
 
-/*
-userSchema.path('confPassword').validate((val) => {
-    console.log(this.password);
-    console.log(this.confPasword);
-    return true;
-    
-    let pass = ' ';
-    userSchema.path('password').validate((val) => {
-        pass = val;
-        console.log("hope this works")
-        console.log(val)
-        return true;
-    });
-    console.log("test:")
-    console.log(pass);
-
-    if(true){
-        return false;
-    }
-    else {
-        return true;
-    }
-
-}, 'Typed Passwords do not match');
-*/
-
-//preevent from bcrypt
+//pre-event from bcrypt
 //invoked before save operation and generates saltSecretet in User
 userSchema.pre('save', function (next) {
-    //to check if passwords match
-    //will only work when passwords assigned 
-        //need to be in the invoke before save operation
-    userSchema.path('confPassword').validate((val) => {
-        if(this.password != this.confPassword) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    }, 'Typed Passwords do not match');
-
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (err, hash) => {
-            //console.log(this.password);
-            //console.log(this.confPassword);
+            //we're assuming here that password is same as confPassword
             this.password = hash;
+            this.confPassword = hash;
             this.saltSecret = salt;
             next();
         });
-    });
+    });    
 });
-
+       
+//created 'User' mongoose model
 mongoose.model('User', userSchema);

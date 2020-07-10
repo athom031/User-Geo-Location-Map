@@ -1,6 +1,10 @@
 require('./config/config');
-require('./models/db');
+//config env variable
 
+require('./models/db');
+//connect to mongo db
+
+//express server -> create middleware app
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -10,12 +14,13 @@ const rtsIndex = require('./routes/index.router');
 
 var app = express();
 
-//middleware
+//configure middleware
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/api', rtsIndex);
 
-//'/api/register'
+app.use('/api', rtsIndex);
+//post request: /api/register
+//'/api/register' will be the user request handled by usrctrl.register
 
 //error handler
 app.use((err, req, res, next) => {
@@ -26,5 +31,5 @@ app.use((err, req, res, next) => {
     }
 }); 
 
-//start server
+//start server through our express server middleware
 app.listen(process.env.PORT, () => console.log(`Server started at port : ${process.env.PORT}`));
