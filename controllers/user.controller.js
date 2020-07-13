@@ -34,6 +34,7 @@ module.exports.register = (req, res, next) => {
             //we access the promise call and get the value of it with another .then()
             let country = ' ';
             country = data['results'][0]['address_components'][6]['long_name'];
+            user.address = data['results'][0]['formatted_address'];
             console.log(country);
             if(country != 'United States') {
                 res.status(422).send(['Address must be in the U.S.']);

@@ -31,18 +31,21 @@ var userSchema = new mongoose.Schema({
         required: 'Address is required. Must be US.'
         //TODO: eventually want a check for US ADDRESS
     },
+    //will be altered when stored in database to protect user privacy
     password: {
         type: String,
         required: "Password is required."
         //lets try validate method -> email
         //minlength : [8, "Password must be atleast 8 characters long"]
     },
-    saltSecret: String, //not assigned in client side
     confPassword: {
         type:String,
         required: "Please confirm password"
-    }
-    //saltSec: String //not assigned on client side (potentially not needed why not just set same val after check)
+    },
+    // not assigned in client side
+    saltSecret: String
+    //latCoord: Number,
+    //longCoord: Number
 });
 
 
