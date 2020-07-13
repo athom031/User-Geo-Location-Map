@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 //create mongoose model for users data in mongo db
 
+const axios = require('axios').default;
+//promise based http client for browser/node.js
+
 /*
 TODO: password/confpassword
 TODO: address US check
@@ -52,7 +55,29 @@ userSchema.path('password').validate((val) => {
         return true;
     }
 }, 'Password must be min 6 characters and have atleast 1 uppercase letter and 1 non-letter');
-
+/*
+userSchema.path('address').validate((val) => {
+    let countryCheck = axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
+                                    params: {
+                                        address:val,
+                                        key:'AIzaSyBcbwAdfcOuIZMlYSs7Z5hlRV2Nn6jy2lE'
+                                    }   
+                            })
+                            .then(function(response) {
+                                return response['data']['results'][0]['address_components'][6]['long_name'];
+                            })
+                            .catch(function(err) {
+                                return ' ';
+                            });
+    console.log(countryCheck);
+    if(countryCheck === 'United States') {
+        return true;
+    }
+    else {
+        return false;
+    }
+}, 'Address must be in the U.S.');
+*/
 //pre-event from bcrypt
 //invoked before save operation and generates saltSecretet in User
 userSchema.pre('save', function (next) {
