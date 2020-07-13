@@ -7,4 +7,4 @@ mongoose.connect(process.env.MONGODB_URI, (err) => {
 });
 
 require('./user.model');
-//import the user model and will be called in app.js
+//import the user model for the database data points and will be called in app.js

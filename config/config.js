@@ -14,8 +14,6 @@ const envConfig = config[env];
 //can't innumerate that so lets change this into an innumerable array
 //and then innumerate through this array and assign process.env values
 
-//console.log(process.env['PORT']); //will be undefined
 Object.keys(envConfig).forEach(key => {
     process.env[key] = envConfig[key];
 });
-//console.log(process.env['PORT']); // will be developement PORT (3000)
