@@ -4,6 +4,7 @@ const axios = require('axios').default;
 
 const User = mongoose.model('User');
 
+
 function axiosTest(loc) {
     //axios Call to Geocode API
     return axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -28,13 +29,23 @@ module.exports.register = (req, res, next) => {
     user.address = req.body.address;
     user.password = req.body.password;
     user.confPassword = req.body.confPassword;
+    //user.latCoord
+    //user.lngCoord
+    //user.saltSecret
 
     axiosTest(user.address)
         .then(data => {
             //we access the promise call and get the value of it with another .then()
             let country = ' ';
-            country = data['results'][0]['address_components'][6]['long_name'];
-            user.address = data['results'][0]['formatted_address'];
+            //get country to check 
+            country = data.results[0].address_components[6].long_name
+            
+            //set user location data
+            user.address = data.results[0].formatted_address;
+            //lat/lng
+            user.latCoord = data.results[0].geometry.location.lat;
+            user.lngCoord = data.results[0].geometry.location.lng;
+            
             console.log(country);
             if(country != 'United States') {
                 res.status(422).send(['Address must be in the U.S.']);

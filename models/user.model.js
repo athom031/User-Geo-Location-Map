@@ -43,9 +43,9 @@ var userSchema = new mongoose.Schema({
         required: "Please confirm password"
     },
     // not assigned in client side
-    saltSecret: String
-    //latCoord: Number,
-    //longCoord: Number
+    saltSecret: String,
+    latCoord: Number,
+    lngCoord: Number
 });
 
 
