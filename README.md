@@ -87,8 +87,9 @@ See also the list of [contributors](https://github.com/your/project/contributors
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
+How to deal with waiting on the promise call.
 * https://stackoverflow.com/questions/48980380/returning-data-from-axios-api
-* How to deal with waiting on the promise call.
+
 * Hat tip to anyone whose code was used
 * Inspiration
 * etc
