@@ -1,0 +1,80 @@
+//REGISTER STYLE
+.reg-container {
+    //margin-top:100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 100;
+
+    //padding: 1000px, 5000px
+
+    .header { 
+        font-size: 24px;
+        font-family: 'Merriweather', serif;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+
+        .image {
+            width: 18em;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .form {
+            margin-top:2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: fit-content;
+                label {
+                    font-size: 14px;
+                }
+                input {
+                    margin-top: 6px;
+                    min-width: 18em;
+                    height: 37px;
+                    padding: 0px 10px;
+                    font-size: 12px;
+                    font-family: 'Merriweather', serif;
+                    background-color: #f3f3f3;
+                    border: 0;
+                    //border-color: red;
+                    border-radius: 4px;
+                    margin-bottom: 10px;
+                    transition: all 250ms ease-in-out;
+                    &:hover {
+                        background-color: #ffffff;
+                        box-shadow: 0px 0px 5px 5px #6182ba96;
+                    }
+                    &:focus {
+                        background-color: #ffffff;
+                        outline: none;
+                        box-shadow: 0px 0px 12px .8px #6182ba96;
+                    }
+                }
+            }
+            /*
+            .pass {
+                label {
+                    color: red;
+                }
+            }*/
+
+            /*
+            .footer {
+                margin-top: 1em;
+            } */
+        }
+    }
+}

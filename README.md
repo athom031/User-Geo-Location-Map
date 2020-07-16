@@ -96,5 +96,12 @@ How to send JSON object to server with a post:
 Form Controlled Component basics
 * https://www.youtube.com/watch?v=7Vo_VCcWupQ
 
-* Inspiration: Mean Stack User Registration
+Styling Background Image 
+* https://css-tricks.com/perfect-full-page-background-image/
+
+React Login Registration Form
+* https://www.youtube.com/watch?v=juUaJpMd2LE
+
+## Inspiration: 
+Mean Stack User Registration
 * https://www.youtube.com/watch?v=m34FCkBd7UU&t=1839s

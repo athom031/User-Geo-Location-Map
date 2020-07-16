@@ -1,0 +1,71 @@
+//Custom Font
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+//font-family: 'Merriweather', serif;
+
+
+.App {
+  
+  text-align: center;
+  display: flex;
+  justify-content: center; // keeps app in the center
+  align-items: center;
+  font-family: 'Merriweather', serif;
+  height: 100vh;
+  //width: 100vw;
+
+  //following are to make sure the image stays in the background
+  background: url(./image_svg/background.jpg) no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-attachment: fixed;
+  background-size: cover;
+  // ---------------------------------------------------------- //
+}
+
+.login {
+  width: 27em;
+  height: 40em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  position: relative;
+  z-index: 99;
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(230, 233, 239);
+    box-shadow: 0px 0px 12px 2px rgba(15, 15, 15, 0.2);
+    border-radius: 4px;
+    position: relative;
+    z-index: 99;
+    width: 100%;
+    z-index: 99;
+    padding: 17px 10px;
+  }
+}
+
+//Button
+.btn {
+  font-size: 20px;
+  //align-items: center;
+  padding: 10px 10px;
+  border: 0;
+  background-color: #536DFE;
+  color: rgb(230, 233, 239);// #fff;
+  border-radius: 10px;
+  margin-top: 10px;
+  //margin-bottom: 100px;
+  transition: all 250ms ease-in-out;
+  cursor: pointer;
+  &:hover {
+    background-color: #3b4eb8;
+  }
+  &:focus {
+    outline: none;
+  } 
+}
