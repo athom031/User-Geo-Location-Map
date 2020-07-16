@@ -87,9 +87,14 @@ See also the list of [contributors](https://github.com/your/project/contributors
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-How to deal with waiting on the promise call.
+How to deal with waiting on the promise call:
 * https://stackoverflow.com/questions/48980380/returning-data-from-axios-api
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+How to send JSON object to server with a post:
+* https://www.geeksforgeeks.org/how-to-send-a-json-object-to-a-server-using-javascript/
+
+Form Controlled Component basics
+* https://www.youtube.com/watch?v=7Vo_VCcWupQ
+
+* Inspiration: Mean Stack User Registration
+* https://www.youtube.com/watch?v=m34FCkBd7UU&t=1839s
