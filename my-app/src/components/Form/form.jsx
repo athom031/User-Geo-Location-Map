@@ -1,6 +1,8 @@
 import React from 'react';
 //import User from '../User/userModel'
-import {checkData , submitHelper } from './submit';
+import submitHelper from './submitHelper';
+import checkData from './checkData';
+
 import user from '../../image_svg/user.svg';
 export class Form extends React.Component {
     
@@ -53,11 +55,12 @@ export class Form extends React.Component {
                                    "confPassword": this.state.confPassword
                                   });
         if(checkData(data)) {
-            submitHelper(data); //call imported function with json data
-            //alert(`Congrats ${this.state.fullName}, ${this.state.userName} has been registered.`);
+            //check data for matching passwords, address is in the us, password constraints
+            submitHelper(data);
             event.preventDefault();
+            //if successfully sends data refresh page -> potentially after a success message?
+            //username being in db to be handled on server side
         } else {
-            
             event.preventDefault(); //stops page from refreshing which we will take out after handling success/error
         }
     }
@@ -84,15 +87,13 @@ export class Form extends React.Component {
                                 <label>Address</label>
                                 <input type='text' value = { address }  onChange = { this.handleAddressChange } required />
                             </div>
-                            <div className="pass">
-                                <div className="form-group">
-                                    <label>Password</label>
-                                    <input type='password' value = { password }  onChange = { this.handlePasswordChange } required minLength="6" />
-                                </div>
-                                <div className="form-group">
-                                    <label>Confirm Password</label>
-                                    <input type='password' value = { confPassword }  onChange = { this.handleConfpasswordChange } required minLength="6"/>
+                            <div className="form-group">
+                                <label>Password</label>
+                                <input type='password' value = { password }  onChange = { this.handlePasswordChange } required />
                             </div>
+                            <div className="form-group">
+                                <label>Confirm Password</label>
+                                <input type='password' value = { confPassword }  onChange = { this.handleConfpasswordChange } required />
                             </div>
                             <div className="footer">
                                 <button type="submit" className = "btn">
