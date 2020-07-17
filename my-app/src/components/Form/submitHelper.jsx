@@ -1,5 +1,5 @@
 
-function submitHelper(data) {
+function submitHelper(form, data) {
     //create the xhr object
     let xhr  = new XMLHttpRequest();
     let url =  'http://localhost:3000/api/register';
@@ -14,8 +14,11 @@ function submitHelper(data) {
     //create state change callback
     xhr.onreadystatechange = function () {
         if(xhr.readyState === 4 && xhr.status === 200) {
-            console.log("Sending Data:")
-            console.log(this.responseText);
+            //console.log("Sending Data:")
+            //console.log(this.responseText);
+            form.setState({
+                regSuccess: true 
+            })
         }
         else if(xhr.readyState === 4 && xhr.status === 422) {
             console.log('ERROR!');

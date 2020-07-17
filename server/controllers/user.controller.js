@@ -37,7 +37,6 @@ module.exports.register = (req, res, next) => {
     axiosTest(user.address)
         .then(data => {
             //we access the promise call and get the value of it with another .then()
-            console.log(data);
             if(data.status === 'ZERO_RESULTS' || data.results[0].address_components.length < 7) {
                 //user puts in something like 'a'
                 res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);

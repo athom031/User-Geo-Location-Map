@@ -4,6 +4,7 @@ import submitHelper from './submitHelper';
 import checkData from './checkData';
 
 import user from '../../image_svg/user.svg';
+import success from '../../image_svg/success.svg';
 export class Form extends React.Component {
     
     constructor(props) {
@@ -14,7 +15,8 @@ export class Form extends React.Component {
             userName:     '',
             address:      '',
             password:     '',
-            confPassword: ''
+            confPassword: '',
+            regSuccess: false
         }
     }
     
@@ -56,7 +58,7 @@ export class Form extends React.Component {
                                   });
         if(checkData(data)) {
             //check data for matching passwords, address is in the us, password constraints
-            submitHelper(data);
+            submitHelper(this, data);
             event.preventDefault();
             //if successfully sends data refresh page -> potentially after a success message?
             //username being in db to be handled on server side
@@ -64,45 +66,81 @@ export class Form extends React.Component {
             event.preventDefault(); //stops page from refreshing which we will take out after handling success/error
         }
     }
+
+    regAgain = event => {
+        
+        this.setState ({
+            fullName:     '',
+            userName:     '',
+            address:      '',
+            password:     '',
+            confPassword: '',
+            regSuccess: false
+        })
+    }
+
     render() {
+        const isRegSuccess = this.state.regSuccess;
         const { fullName, userName, address, password, confPassword } = this.state;  
         return(
-            <div className="reg-container">
-                <div className="header">Register</div>
-                <div className="content">
-                    <div className="image">
-                        <img src={user}/>
-                    </div>
-                    <div className="form">
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label>Full Name</label>
-                                <input type='text' value = { fullName }  onChange = { this.handleFullnameChange } required />
+            <div>
+            {isRegSuccess
+                ?
+                <div className="suc-container">
+                    <div className="content">
+                        <div className="image">
+                            <img src={success}/>
+                        </div>
+                        <div className="message">
+                            Successfully registered:
+                        </div>
+                        <div className="user-container">
+                            <div className="userInfo">
+                                {fullName}<br/>{userName}
                             </div>
-                            <div className="form-group">
-                                <label>Username</label>
-                                <input type='text' value = { userName }  onChange = { this.handleUsernameChange } required />
-                            </div>
-                            <div className="form-group">
-                                <label>Address</label>
-                                <input type='text' value = { address }  onChange = { this.handleAddressChange } required />
-                            </div>
-                            <div className="form-group">
-                                <label>Password</label>
-                                <input type='password' value = { password }  onChange = { this.handlePasswordChange } required />
-                            </div>
-                            <div className="form-group">
-                                <label>Confirm Password</label>
-                                <input type='password' value = { confPassword }  onChange = { this.handleConfpasswordChange } required />
-                            </div>
-                            <div className="footer">
-                                <button type="submit" className = "btn">
-                                    Register
-                                </button>
-                            </div>
-                        </form>
+                        </div>
+                        <button type="button" onClick={this.regAgain} className="btn">Register Another User</button>
                     </div>
                 </div>
+                :
+                <div className="reg-container">
+                    <div className="header">Register</div>
+                    <div className="content">
+                        <div className="image">
+                            <img src={user}/>
+                        </div>
+                        <div className="form">
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="form-group">
+                                    <label>Full Name</label>
+                                    <input type='text' value = { fullName }  onChange = { this.handleFullnameChange } required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Username</label>
+                                    <input type='text' value = { userName }  onChange = { this.handleUsernameChange } required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Address</label>
+                                    <input type='text' value = { address }  onChange = { this.handleAddressChange } required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Password</label>
+                                    <input type='password' value = { password }  onChange = { this.handlePasswordChange } required />
+                                </div>
+                                <div className="form-group">
+                                    <label>Confirm Password</label>
+                                    <input type='password' value = { confPassword }  onChange = { this.handleConfpasswordChange } required />
+                                </div>
+                                <div className="footer">
+                                    <button type="submit" className = "btn">
+                                        Register
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
             </div>
         );
     }
