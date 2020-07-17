@@ -10,7 +10,7 @@ function axiosTest(loc) {
     //axios Call to Geocode API
     return axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
         params: {
-            address:loc,                                  //Passed in user.address
+            address:loc, //Passed in user.address
             key: API // IMPORTED API KEY (set if not set yet)
         }
     })
@@ -38,7 +38,7 @@ module.exports.register = (req, res, next) => {
         .then(data => {
             //we access the promise call and get the value of it with another .then()
             if(data.status === 'ZERO_RESULTS' || data.results[0].address_components.length < 7) {
-                //user puts in something like 'a'
+                //user puts in something like 'a' (which could be anything) or 'asklfasghals' which gets no result
                 res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);
             } else {
                 let country = ' ';

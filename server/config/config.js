@@ -13,7 +13,6 @@ const envConfig = config[env];
 
 //can't innumerate that so lets change this into an innumerable array
 //and then innumerate through this array and assign process.env values
-
 Object.keys(envConfig).forEach(key => {
     process.env[key] = envConfig[key];
 });

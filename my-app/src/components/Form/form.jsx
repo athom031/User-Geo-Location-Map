@@ -16,7 +16,9 @@ export class Form extends React.Component {
             address:      '',
             password:     '',
             confPassword: '',
-            regSuccess: false
+            regSuccess: false,
+            pendingSearch: false
+            //feature that while searching for something dont do anything for register
         }
     }
     
@@ -49,22 +51,27 @@ export class Form extends React.Component {
     }
 
     handleSubmit = event => {
-        
-        var data = JSON.stringify({"fullName": this.state.fullName,
+        if(!this.state.pendingSearch) {
+            this.state.pendingSearch = true;
+
+            var data = JSON.stringify({"fullName": this.state.fullName,
                                    "userName": this.state.userName,
                                    "address":  this.state.address,
                                    "password": this.state.password,
                                    "confPassword": this.state.confPassword
                                   });
-        if(checkData(data)) {
-            //check data for matching passwords, address is in the us, password constraints
-            submitHelper(this, data);
-            event.preventDefault();
-            //if successfully sends data refresh page -> potentially after a success message?
-            //username being in db to be handled on server side
-        } else {
+            if(checkData(data)) {
+                //check data for matching passwords, address is in the us, password constraints
+                submitHelper(this, data);
+                event.preventDefault();
+                //if successfully sends data refresh page -> potentially after a success message?
+                //username being in db to be handled on server side
+            } else {
             event.preventDefault(); //stops page from refreshing which we will take out after handling success/error
+            }
+            this.state.pendingSearch = false;
         }
+        event.preventDefault();
     }
 
     regAgain = event => {
@@ -75,7 +82,8 @@ export class Form extends React.Component {
             address:      '',
             password:     '',
             confPassword: '',
-            regSuccess: false
+            regSuccess: false,
+            pendingSearch: false
         })
     }
 
