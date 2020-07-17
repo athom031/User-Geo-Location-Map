@@ -54,11 +54,13 @@
     .header { 
         font-size: 24px;
         font-family: 'Merriweather', serif;
+        align-items: center;
     }
 
     .content {
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         .image {
             width: 18em;
@@ -117,6 +119,15 @@
             .footer {
                 margin-top: 1em;
             } */
+        }
+        .error { 
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: white;
+            color:rgb(168, 41, 41);
+            border-radius: 5px;
+            padding: 10px 10px;
         }
     }
 }

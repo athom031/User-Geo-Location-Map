@@ -16,6 +16,8 @@ export class Form extends React.Component {
             address:      '',
             password:     '',
             confPassword: '',
+            error: '',
+            regSuccess: false
             //feature that while searching for something dont do anything for register
         }
     }
@@ -40,14 +42,14 @@ export class Form extends React.Component {
                                 "password": this.state.password,
                                 "confPassword": this.state.confPassword
                                 });
-        if(checkData(data)) {
+        if(checkData(this, data)) {
             //check data for matching passwords, address is in the us, password constraints
             submitHelper(this, data);
             event.preventDefault();
             //if successfully sends data refresh page -> potentially after a success message?
             //username being in db to be handled on server side
         } else {
-        event.preventDefault(); //stops page from refreshing which we will take out after handling success/error
+            event.preventDefault(); //stops page from refreshing which we will take out after handling success/error
         }
         
         event.preventDefault();
@@ -61,12 +63,14 @@ export class Form extends React.Component {
             address:      '',
             password:     '',
             confPassword: '',
-            pendingSearch: false
+            error: '',
+            regSuccess: false
         })
     }
 
     render() {
         const isRegSuccess = this.state.regSuccess;
+        const errorCheck = this.state.error;
         const { fullName, userName, address, password, confPassword } = this.state;  
         return(
             <div>
@@ -124,6 +128,16 @@ export class Form extends React.Component {
                                 </div>
                             </form>
                         </div>
+                        <div>
+                            {errorCheck=== ''
+                            ?
+                            <div/>
+                            : 
+                            <div className="error">
+                                {errorCheck}
+                            </div>
+                            }
+                        </div>    
                     </div>
                 </div>
             }

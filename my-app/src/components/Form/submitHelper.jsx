@@ -21,8 +21,10 @@ function submitHelper(form, data) {
             })
         }
         else if(xhr.readyState === 4 && xhr.status === 422) {
-            console.log('ERROR!');
-            alert(this.responseText);
+            form.setState({
+                error: this.responseText.substring(2, this.responseText.length-2)
+            });
+            //alert(this.responseText);
         }
     };
     
