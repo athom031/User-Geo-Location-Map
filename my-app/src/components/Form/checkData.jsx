@@ -1,5 +1,3 @@
-//const axios = require('axios').default;
-
 function checkData(form, d) {
     let check = true;
 

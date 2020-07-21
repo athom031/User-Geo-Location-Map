@@ -1,5 +1,5 @@
 import React from 'react';
-//import User from '../User/userModel'
+
 import submitHelper from './submitHelper';
 import checkData from './checkData';
 
@@ -18,7 +18,6 @@ export class Form extends React.Component {
             confPassword: '',
             error: '',
             regSuccess: false
-            //feature that while searching for something dont do anything for register
         }
     }
     
@@ -34,22 +33,21 @@ export class Form extends React.Component {
     
     handleConfpasswordChange = event => { this.setState({ confPassword: event.target.value }) }
 
-    handleSubmit = event => {
-    
+    handleSubmit = event => {    
         var data = JSON.stringify({"fullName": this.state.fullName,
                                 "userName": this.state.userName,
                                 "address":  this.state.address,
                                 "password": this.state.password,
                                 "confPassword": this.state.confPassword
                                 });
+        
         if(checkData(this, data)) {
-            //check data for matching passwords, address is in the us, password constraints
+            //check data for matching passwords, password constraints
             submitHelper(this, data);
             event.preventDefault();
-            //if successfully sends data refresh page -> potentially after a success message?
-            //username being in db to be handled on server side
+            //username being in db/us address to be handled on server side
         } else {
-            event.preventDefault(); //stops page from refreshing which we will take out after handling success/error
+            event.preventDefault(); //stops page from refreshing, allows user to fix mistakes
         }
         
         event.preventDefault();
@@ -71,7 +69,9 @@ export class Form extends React.Component {
     render() {
         const isRegSuccess = this.state.regSuccess;
         const errorCheck = this.state.error;
-        const { fullName, userName, address, password, confPassword } = this.state;  
+
+        const { fullName, userName, address, password, confPassword } = this.state;
+
         return(
             <div>
             {isRegSuccess
@@ -145,5 +145,3 @@ export class Form extends React.Component {
         );
     }
 }
-
-//export default Form;

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const axios = require('axios').default;
+//promise based http client for browser/node.js;
 
 const User = mongoose.model('User');
 
@@ -29,7 +30,6 @@ module.exports.register = (req, res, next) => {
     user.userName = req.body.userName; 
     user.address = req.body.address; //will be changed to formatted
     user.password = req.body.password; //will be changed
-    user.confPassword = req.body.confPassword; //will be changed
     //user.latCoord to be assigned
     //user.lngCoord to be assigned
     //user.saltSecret to be assigned 
@@ -41,11 +41,14 @@ module.exports.register = (req, res, next) => {
                 //user puts in something like 'a' (which could be anything) or 'asklfasghals' which gets no result
                 res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);
             } else {
-                let country = ' ';
+                let country = '';
+                data.results[0].address_components.forEach(elem => {
+                    if(elem.types[0] === 'country') {
+                        country = elem.long_name;
+                    }
+                });
                 //get country field to check if in US 
-                country = data.results[0].address_components[6].long_name
-                console.log(country);
-
+                
                 //set user location data
                 user.address = data.results[0].formatted_address;
 
@@ -56,7 +59,7 @@ module.exports.register = (req, res, next) => {
                     res.status(422).send(['ERROR: Address must be in the U.S.']); //address check
                 }
                 else {
-                    if(user.password != user.confPassword) {
+                    if(req.body.password != req.body.confPassword) {
                         res.status(422).send(['ERROR: Typed passwords do not match']); //conf password check
                     }
                     else {

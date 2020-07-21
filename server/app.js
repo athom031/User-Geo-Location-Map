@@ -9,7 +9,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const rtsIndex = require('./routes/index.router');
+const rtsIndex = require('./routes/indexRouter');
 //html request to register mongo db data point
 
 var app = express();

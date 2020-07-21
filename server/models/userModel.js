@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 //create mongoose model for users data in mongo db
 
-const axios = require('axios').default;
-//promise based http client for browser/node.js
-
 const bcrypt = require('bcryptjs');
 //needed to encrypt password and keep secret in database
 
@@ -30,10 +27,6 @@ var userSchema = new mongoose.Schema({
         required: "Password is required.",
         minlength : [6, "Password must be atleast 6 characters long"]
     },
-    confPassword: {
-        type:String,
-        required: "Please confirm password"
-    },
     // not assigned in client side
     saltSecret: String,
     latCoord: Number,
@@ -57,7 +50,6 @@ userSchema.pre('save', function (next) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (err, hash) => {
             this.password = hash;
-            this.confPassword = hash; //would have already checked confPassword === password
             this.saltSecret = salt;
             next();
         });
