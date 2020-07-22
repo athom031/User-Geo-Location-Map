@@ -14,6 +14,8 @@ const rtsIndex = require('./routes/indexRouter');
 
 var app = express();
 
+const UserData = require('./models/userModel');
+
 //configure middleware
 app.use(bodyParser.json());
 app.use(cors());
@@ -33,3 +35,15 @@ app.use((err, req, res, next) => {
 
 //start server through our express server middleware
 app.listen(process.env.PORT, () => console.log(`Server started at port : ${process.env.PORT}`));
+
+app.get('/api/data', (req, res) => {
+
+    UserData.find({ })
+        .then((data) => {
+            res.json(data);
+        })
+        .catch((error) => {
+            console.log('error ', error);
+        });
+
+});

@@ -7,4 +7,5 @@ const ctrlUser = require('../controllers/userController');
 router.post('/register', ctrlUser.register);
 //router will call ctrlUser on /api/register
 
+
 module.exports = router;

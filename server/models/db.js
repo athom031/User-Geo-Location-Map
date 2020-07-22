@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+//depreciation warnings
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
+mongoose.set('useUnifiedTopology', true);
+
 //attempt to connect with the mongodb_uri based on config initialization
 mongoose.connect(process.env.MONGODB_URI, (err) => {
     if(!err) { console.log('MongoDB connection succeeded.'); }
