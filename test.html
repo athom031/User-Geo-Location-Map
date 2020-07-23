@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Circles</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcbwAdfcOuIZMlYSs7Z5hlRV2Nn6jy2lE&callback=initMap&libraries=&v=weekly"
+      defer
+    ></script>
+    <style type="text/css">
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      "use strict";
+
+      const citymap = {
+        chicago: {
+          center: {
+            lat: 41.878,
+            lng: -87.629
+          },
+          population: 2714856
+        },
+        newyork: {
+          center: {
+            lat: 40.714,
+            lng: -74.005
+          },
+          population: 8405837
+        },
+        losangeles: {
+          center: {
+            lat: 34.052,
+            lng: -118.243
+          },
+          population: 3857799
+        },
+        vancouver: {
+          center: {
+            lat: 49.25,
+            lng: -123.1
+          },
+          population: 603502
+        }
+      };
+
+      function initMap() {
+        // Create the map.
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 4,
+          center: {
+            lat: 37.09,
+            lng: -95.712
+          },
+          styles: [
+        {
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#212121"
+            }
+            ]
+        },
+        {
+            "elementType": "labels.icon",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#757575"
+            }
+            ]
+        },
+        {
+            "elementType": "labels.text.stroke",
+            "stylers": [
+            {
+                "color": "#212121"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#212121"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.country",
+            "elementType": "geometry.stroke",
+            "stylers": [
+            {
+                "color": "#33407a"
+            },
+            {
+                "weight": 1
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.country",
+            "elementType": "labels.text",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.country",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#9e9e9e"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.land_parcel",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.locality",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#bdbdbd"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.neighborhood",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.province",
+            "elementType": "geometry.stroke",
+            "stylers": [
+            {
+                "color": "#33407a"
+            }
+            ]
+        },
+        {
+            "featureType": "administrative.province",
+            "elementType": "labels.text",
+            "stylers": [
+            {
+                "color": "#33407a"
+            },
+            {
+                "visibility": "simplified"
+            }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "geometry.fill",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#757575"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.business",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#181818"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#616161"
+            }
+            ]
+        },
+        {
+            "featureType": "poi.park",
+            "elementType": "labels.text.stroke",
+            "stylers": [
+            {
+                "color": "#1b1b1b"
+            }
+            ]
+        },
+        {
+            "featureType": "road",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "geometry.fill",
+            "stylers": [
+            {
+                "color": "#2c2c2c"
+            }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels.icon",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#8a8a8a"
+            }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#373737"
+            }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#3c3c3c"
+            }
+            ]
+        },
+        {
+            "featureType": "road.highway.controlled_access",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#4e4e4e"
+            }
+            ]
+        },
+        {
+            "featureType": "road.local",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#616161"
+            }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#757575"
+            }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "geometry",
+            "stylers": [
+            {
+                "color": "#000000"
+            }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text",
+            "stylers": [
+            {
+                "visibility": "off"
+            }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "labels.text.fill",
+            "stylers": [
+            {
+                "color": "#3d3d3d"
+            }
+            ]
+        }
+        ],
+        mapTypeControl: false,
+        disableDefaultUI: true,
+        //mapTypeId: 'terrain',
+
+        }); // Construct the circle for each value in citymap.
+        // Note: We scale the area of the circle based on the population.
+        
+        for (const city in citymap) {
+          // Add the circle for this city to the map.
+          const cityCircle = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.50,
+            map,
+            center: citymap[city].center,
+            radius: 10000
+          });
+        }
+        console.log(map.getZoom());
+      }
+    </script>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>

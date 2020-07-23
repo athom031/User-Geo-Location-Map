@@ -1,10 +1,13 @@
 import React from 'react';
 
+//helper functions
 import submitHelper from './submitHelper';
 import checkData from './checkData';
 
+//svg files
 import user from '../../image_svg/user.svg';
 import success from '../../image_svg/success.svg';
+
 export class Form extends React.Component {
     
     constructor(props) {
@@ -44,12 +47,9 @@ export class Form extends React.Component {
         if(checkData(this, data)) {
             //check data for matching passwords, password constraints
             submitHelper(this, data);
-            event.preventDefault();
             //username being in db/us address to be handled on server side
-        } else {
-            event.preventDefault(); //stops page from refreshing, allows user to fix mistakes
         }
-        
+        //stops page from refreshing, allows user to fix mistakes
         event.preventDefault();
     }
 
@@ -129,7 +129,7 @@ export class Form extends React.Component {
                             </form>
                         </div>
                         <div>
-                            {errorCheck=== ''
+                            {errorCheck === ''
                             ?
                             <div/>
                             : 

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); 
 //create mongoose model for users data in mongo db
 
 const bcrypt = require('bcryptjs');
@@ -36,12 +36,7 @@ var userSchema = new mongoose.Schema({
 
 //validation for password specifications other than minLength
 userSchema.path('password').validate((val) => {
-    if(val.toLowerCase() === val || /^[a-zA-Z]+$/.test(val)) {
-        return false;
-    }
-    else {
-        return true;
-    }
+    return (val.toLowerCase() === val || /^[a-zA-Z]+$/.test(val)) ? false : true;
 }, 'Password must have atleast 1 uppercase letter and 1 non-letter');
 
 //pre-event from bcrypt

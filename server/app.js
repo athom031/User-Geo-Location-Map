@@ -1,8 +1,8 @@
-require('./config/config');
-//config env variable
+//export/import not default in node js so use module.exports/require
 
-require('./models/db');
-//connect to mongo db
+require('./config/config'); //config env variable
+
+require('./models/db'); //connect to mongo db
 
 //express server -> create middleware app
 const express = require('express');
@@ -37,7 +37,6 @@ app.use((err, req, res, next) => {
 app.listen(process.env.PORT, () => console.log(`Server started at port : ${process.env.PORT}`));
 
 app.get('/api/data', (req, res) => {
-
     UserData.find({ })
         .then((data) => {
             res.json(data);
@@ -45,5 +44,4 @@ app.get('/api/data', (req, res) => {
         .catch((error) => {
             console.log('error ', error);
         });
-
 });

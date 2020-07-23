@@ -1,5 +1,7 @@
 
 function submitHelper(form, data) {
+    // we are sending confPassword to post, but not part of model
+    
     //create the xhr object
     let xhr  = new XMLHttpRequest();
     let url =  'http://localhost:3000/api/register';
@@ -23,8 +25,8 @@ function submitHelper(form, data) {
         else if(xhr.readyState === 4 && xhr.status === 422) {
             form.setState({
                 error: this.responseText.substring(2, this.responseText.length-2)
+                // takes out [" "] so that it matches syntax of other errors
             });
-            //alert(this.responseText);
         }
     };
     

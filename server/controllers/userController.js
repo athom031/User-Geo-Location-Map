@@ -58,25 +58,23 @@ module.exports.register = (req, res, next) => {
                 if(country != 'United States') {
                     res.status(422).send(['ERROR: Address must be in the U.S.']); //address check
                 }
+                else if(req.body.password != req.body.confPassword) {
+                    res.status(422).send(['ERROR: Typed passwords do not match']); //conf password check
+                }
                 else {
-                    if(req.body.password != req.body.confPassword) {
-                        res.status(422).send(['ERROR: Typed passwords do not match']); //conf password check
-                    }
-                    else {
-                        //still have the fourth param -> encrypted password
-                        user.save((err, doc) => {
-                            if(!err) { 
-                                res.send(doc);
-                            }
-                            else {
-                                //username is set to unique, check for existing username in database
-                                if(err.code === 11000) 
-                                    res.status(422).send(['ERROR: Duplicate username found.']);
-                                else     
-                                    return next(err); //if this isn't the error return the other errors
-                            }
-                        });
-                    }
+                    //still have the fourth param -> encrypted password
+                    user.save((err, doc) => {
+                        if(!err) { 
+                            res.send(doc);
+                        }
+                        else {
+                            //username is set to unique, check for existing username in database
+                            if(err.code === 11000) 
+                                res.status(422).send(['ERROR: Duplicate username found.']);
+                            else     
+                                return next(err); //if this isn't the error return the other errors
+                        }
+                    });
                 }
             }
         })

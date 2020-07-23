@@ -3,7 +3,7 @@ function checkData(form, d) {
 
     let data = JSON.parse(d);
     
-    //things to check
+    //things to check:
         //1) password matches confPassword
         //2) password constraints
         
