@@ -1,4 +1,4 @@
-# User Registration Lat Long Map 
+# User Localization Visualization Tool
 
 This project is to create a visual map of users which includes:
 1) A web page where users can register with their information (username, name, password, US address).
