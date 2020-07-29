@@ -8,14 +8,36 @@ import './styles/Map.scss';
 
 import getData from "./userData/get";
 
+
 export class MapContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            coords:  []
+            coords:  [],
+            showingInfoWindow: false,  //Hides or the shows the infoWindow
+            activeMarker: {},          //Shows the active marker upon click
+            selectedPlace: {},          //Shows the infoWindow to the selected place upon a marker
+            field: null
         }
+
     }
 
+    
+    onMarkerClick = (props, marker, e) =>
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        });
+
+    onClose = props => {
+        if (this.state.showingInfoWindow) {
+            this.setState({
+            showingInfoWindow: false,
+            activeMarker: null
+            });
+        }
+    };
 
     setCoords = async () => { 
         let arr = await getData();
@@ -27,15 +49,19 @@ export class MapContainer extends Component {
 
     displayMarkers = () => {
         return this.state.coords.map((coord, index) => {
+            let info = `${coord.fullName} (${coord.userName}) is ${coord.online ? 'online' : 'offline'}.`
+        
             return <Marker key={index} id={index} position={{
-                lat: coord[1],
-                lng: coord[2]
+                lat: coord.latCoord,
+                lng: coord.lngCoord
             }}
-            
-            onClick={() => {
-                let str = coord[3] ? ' is online.' : ' is offline.'; 
-                console.log(coord[0] + str)}
-            }/>
+            icon = {{
+                url: (coord.online) ? "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" : "http://labs.google.com/ridefinder/images/mm_20_gray.png"
+            }}
+            onClick={this.onMarkerClick}
+            name = {info}
+
+            />
         })
     }
 
@@ -64,6 +90,13 @@ export class MapContainer extends Component {
                         disableDefaultUI = {true}
                     >
                         {this.displayMarkers()}
+                        <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                        onClose={this.onClose}
+                        >
+                            <h4>{this.state.selectedPlace.name}</h4>
+                        </InfoWindow>
                     </Map>
                 </div>
                 
@@ -71,6 +104,10 @@ export class MapContainer extends Component {
                     <button type = "submit" className = "btn" onClick={this.setCoords}>
                             Map Refresh
                     </button>
+                </div>
+
+                <div className = "User Info"> 
+                    {this.state.field}
                 </div>
             </div>
         );

@@ -9,10 +9,13 @@ const getData = async () => {
             let arr = [];
             
             for(let i in jsonResponse) {
-                arr.push([jsonResponse[i].fullName, 
-                          jsonResponse[i].latCoord, 
-                          jsonResponse[i].lngCoord, 
-                          jsonResponse[i].online]);
+                arr.push({
+                          fullName: jsonResponse[i].fullName,
+                          userName: jsonResponse[i].userName,
+                          latCoord: jsonResponse[i].latCoord,
+                          lngCoord: jsonResponse[i].lngCoord,
+                          online:   jsonResponse[i].online 
+                });
             }
             
             return arr;
