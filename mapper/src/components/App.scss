@@ -1,0 +1,48 @@
+//536DFE
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+
+body{
+  margin:0;
+  background-color: black;
+}
+.App {
+
+  //following are to make sure the image stays in the background
+  background-color: black;
+  color: #536DFE;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+  .Title { 
+    display: flex;
+    flex-direction: row;
+    padding-top: 1em;
+    padding-right: 5em;
+    padding-left: 10em;
+    padding-bottom: 2em;
+
+    .Logo {
+      width: 20em;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+      padding-right: 50px;
+    }  
+    .Name-Container{ 
+      display: flex;
+      align-items: center;
+      padding-left: 2em;
+      padding-right: 8em;
+      padding-top: 1em;
+      .Name {
+        font-size: 5em;
+        font-weight: 900;
+        background-color: #212121;
+        border-radius: 10px;
+        padding: 5px 5px;
+        
+      }
+    }
+  }
+  // ---------------------------------------------------------- //
+}

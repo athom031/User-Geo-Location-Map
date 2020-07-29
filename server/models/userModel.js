@@ -27,6 +27,7 @@ var userSchema = new mongoose.Schema({
         required: "Password is required.",
         minlength : [6, "Password must be atleast 6 characters long"]
     },
+    online: Boolean, //set to false
     // not assigned in client side
     saltSecret: String,
     latCoord: Number,

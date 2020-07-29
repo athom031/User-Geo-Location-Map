@@ -10,7 +10,7 @@ const API = require('../../API');
 //http request geocode data using ES8 promise implementation (async/await + fetch)
 async function getCountry(loc) {
     //EXAMPLE API REQUEST
-    //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
+        //https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY
     let geoUrlBase = 'https://maps.googleapis.com/maps/api/geocode/json'
     let locUpdate = loc.split(' ').join('+');
     let url = `${geoUrlBase}?address=${locUpdate}&key=${API}`;
@@ -21,6 +21,7 @@ async function getCountry(loc) {
             const jsonResponse = await response.json();
             return jsonResponse;
         }
+        throw new Error('Request Failed!');
     } catch(err) {
         console.log(err);
         return 'err';
@@ -39,6 +40,8 @@ module.exports.register = async (req, res, next) => {
     user.userName = req.body.userName; 
     user.address = req.body.address; //will be changed to formatted
     user.password = req.body.password; //will be changed
+    user.online = false;
+
     //user.latCoord to be assigned
     //user.lngCoord to be assigned
     //user.saltSecret to be assigned 
@@ -46,10 +49,9 @@ module.exports.register = async (req, res, next) => {
     let data = await getCountry(user.address);
     //call async function and only continue until returned promise is resolved
 
-    if(data === 'err' || typeof data === 'undefined' || data.status === 'ZERO_RESULTS' || data.results[0].address_components.length < 7) {
+    if(data === 'err' || data.status != 'OK' || data.results[0].address_components.length < 7) {
         // many things tested here: 
             //incase there is error in promise
-            //undefined search returned
             //search gets no results
             //search results is too general
         res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);

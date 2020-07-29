@@ -1,4 +1,4 @@
-# User Registration Lat Long Map 
+# User Localization Visualization Tool
 
 This project is to create a visual map of users which includes:
 1) A web page where users can register with their information (username, name, password, US address).
@@ -68,6 +68,18 @@ Add additional notes about how to deploy this on a live system
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
+* mongoose
+* express
+* bodyparser
+* concurrency
+* axios
+* bcrypt
+* google-maps-react
+* react-app-rewired
+* customize-cra
+
+
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -101,6 +113,9 @@ Styling Background Image
 
 React Login Registration Form
 * https://www.youtube.com/watch?v=juUaJpMd2LE
+
+Import outside of React src folder
+* https://stackoverflow.com/questions/44114436/the-create-react-app-imports-restriction-outside-of-src-directory
 
 ## Inspiration: 
 Mean Stack User Registration

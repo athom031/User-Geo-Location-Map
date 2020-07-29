@@ -1,5 +1,4 @@
 //export/import not default in node js so use module.exports/require
-
 require('./config/config'); //config env variable
 
 require('./models/db'); //connect to mongo db

@@ -47,6 +47,7 @@ export class Form extends React.Component {
         if(checkData(this, data)) {
             //check data for matching passwords, password constraints
             submitHelper(this, data);
+            
             //username being in db/us address to be handled on server side
         }
         //stops page from refreshing, allows user to fix mistakes
