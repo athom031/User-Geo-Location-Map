@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const fetch    = require('node-fetch');
 //ES8 have to install async and import fetch
 
+const passport = require('passport'); //login passport library
+
+const _ = require('lodash'); //allows to limit user info return from db
+
 const User = mongoose.model('User');
 
 const API = require('../../API');
@@ -94,3 +98,25 @@ module.exports.register = async (req, res, next) => {
         }
     }
 }
+
+module.exports.authenticate = (req, res, next) => { //post route function to send credentials for authentication
+    passport.authenticate('local', (err, user, info) => { //calls arrow function in passport config
+        if(err) 
+            return res.status(400).json(err); // passport middleware error
+        else if(user) 
+            return res.status(200).json({ "token" : user.generateJwt() }); //registered user
+        else 
+            return res.status(404).json(info); //unkown user or incorrect password entered 
+    })(req, res);
+}
+
+module.exports.userProfile = (req, res, next) => {
+    User.findOne({_id: req._id}, 
+      (err, user) => {
+          if(!user) 
+            return res.status(404).json({ status: false, message: 'User record not found'});
+          else
+            return res.status(200).json({ status: true, user: _.pick(user, ['fullName', 'userName', 'address']) });
+      }  
+    );
+} 

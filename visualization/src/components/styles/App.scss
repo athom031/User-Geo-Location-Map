@@ -1,4 +1,3 @@
-//536DFE
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
 
 body{
@@ -48,5 +47,8 @@ body{
   .Map-Container {
       display: flex;
       flex-direction: column;
+      padding-left:4em;
+      padding-right:4em;
+      padding-bottom: 2em;
   }
 }

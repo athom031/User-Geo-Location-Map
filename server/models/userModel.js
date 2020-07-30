@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 //needed to encrypt password and keep secret in database
 
+const jwt = require('jsonwebtoken'); //JSON web token for user 
+
 var userSchema = new mongoose.Schema({
     //none are optional -> data must be inputed
     fullName: {
@@ -51,8 +53,26 @@ userSchema.pre('save', function (next) {
         });
     });    
 });
-       
+ 
+//methods for login authentication 
+userSchema.methods.verifyPassword = function(password) { //used in passport config
+    return bcrypt.compareSync(password, this.password); //returns boolean
+    //bcrypt function to compare db encrypted password with typed base password
+};
+
+userSchema.methods.generateJwt = function() {
+    return jwt.sign({ _id: this._id}, //pass information for payload (id is part of mongodb deafult info)
+        process.env.JWT_SECRET, //secret code defined in json config
+        {
+           expiresIn: process.env.JWT_EXP  //passes '2m' string to define expire time
+        });
+}
+
+
+
 //created 'User' mongoose model
 const UserData = mongoose.model('User', userSchema);
+
+
 
 module.exports = UserData;

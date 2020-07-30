@@ -70,7 +70,7 @@ export class MapContainer extends Component {
             <div className = "map-object">
                 <div className = "map" style = {{
                         marginTop:".5em",
-                        height: "30em",
+                        height: "35em",
                         marginLeft: "12em",
                         marginRight: "12em",
                         marginBottom: "1em",
