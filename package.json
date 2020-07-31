@@ -1,13 +1,15 @@
 {
-  "name": "projectAttemptMEAN",
+  "name": "UserLocationVisualization",
   "version": "1.0.0",
   "description": "This project is to create a visual map of users which includes: 1) A web page where users can register with their information (username, name, password, US address). 2) A way to use the address to store lat long location of users. ap that shows product users on the US map (using lat long). 3) A way for users to edit their own information. 4) A map to display location of users 5) A dummy website for users to log into. 6) A color code that shows which of the users on the map are active.",
   "main": "API.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "brew services restart mongodb-community@4.2 && cd server && nodemon app.js",
-    "client": "cd client && export PORT=3001 && npm start",
-    "dev": "concurrently -n 'server,client' -c 'red,green' \"npm run server\" \"npm run client\""
+    "server": "brew services restart mongodb-community@4.2 && cd server && nodemon app.js && cd ..",
+    "client": "cd client && export PORT=3001 && npm start && cd ..",
+    "visualization": "cd visualization && npm start",
+    "dev": "concurrently -n 'server,client,visualization' -c 'red,green,blue' \"npm run server\" \"npm run client\" \"npm run visualization\"",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",
