@@ -1,3 +1,4 @@
 import "./style.scss"
 
-export { Form } from "./form";
+export { Register } from "./register";
+export { Login } from "./login";

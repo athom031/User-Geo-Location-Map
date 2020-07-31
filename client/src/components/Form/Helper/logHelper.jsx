@@ -1,9 +1,11 @@
-function submitHelper(form, data) {
+//mongodb://localhost:27017/MEANStackDB
+
+function logHelper(form, data) {
     // we are sending confPassword to post, but not part of model
     
     //create the xhr object
     let xhr  = new XMLHttpRequest();
-    let url =  'http://localhost:3000/api/register';
+    let url =  'http://localhost:3000/api/authenticate';
     //if don't have the http:// -> Access-Control-Allow-Origin error
 
     //open a connection
@@ -18,21 +20,23 @@ function submitHelper(form, data) {
             //console.log("Sending Data:")
             //console.log(this.responseText);
             form.setState({
-                regSuccess: true 
+                logSuccess: true 
             })
+            console.log(this.responseText);
         }
-        else if(xhr.readyState === 4 && xhr.status === 422) {
+        else if(xhr.readyState === 4) { 
             form.setState({
-                error: this.responseText.substring(2, this.responseText.length-2)
+                error: JSON.parse(this.responseText).message
                 // takes out [" "] so that it matches syntax of other errors
             });
+            console.log(JSON.parse(this.responseText).message);
         }
     };
     
     xhr.send(data);
 }
 
-export default submitHelper;
+export default logHelper;
 
 /*function submitHelper(form, data) {
     // we are sending confPassword to post, but not part of model

@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const fetch    = require('node-fetch');
 //ES8 have to install async and import fetch
 
+var MongoClient = require('mongodb').MongoClient;
+
 const passport = require('passport'); //login passport library
 
 const _ = require('lodash'); //allows to limit user info return from db
@@ -120,3 +122,25 @@ module.exports.userProfile = (req, res, next) => {
       }  
     );
 } 
+
+module.exports.signin = (req, res, next) => {
+    User.updateOne({userName: req.body.userName}, { $set: {online: true} }, function(err, response) {
+        if(err)
+            return res.status(400).json({ status: false, message: 'Signin Error'});
+        else if(response.n === 0)
+            return res.status(404).json({ status: false, message: 'User not found' });
+        else 
+            return res.status(200).json({ status: true, message: `${req.body.userName} is now online` });
+    });
+}
+
+module.exports.signoff =  (req, res, next) => {
+    User.updateOne({userName: req.body.userName}, { $set: {online: false} }, function(err, response) {
+        if(err)
+            return res.status(400).json({ status: false, message: 'Signoff Error'});
+        else if(response.n === 0)
+            return res.status(404).json({ status: false, message: 'User not found' });
+        else 
+            return res.status(200).json({ status: true, message: `${req.body.userName} is now offline` });
+    });
+}

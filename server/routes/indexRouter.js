@@ -10,10 +10,14 @@ router.post('/register', ctrlUser.register);
 //router will call ctrlUser on /api/register
 router.post('/authenticate', ctrlUser.authenticate); 
 //login authentication
+
+//signin/signoff
+router.post('/signin', ctrlUser.signin);
+router.post('/signoff', ctrlUser.signoff);
+
 router.get('/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile); //defines route function
 //function will be passed before ctrlUser.userProfile
     //verify jwt token defined in config jwtHelper
-
 
 
 module.exports = router;

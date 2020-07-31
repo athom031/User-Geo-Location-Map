@@ -9,14 +9,6 @@ body{
 
 .App {
   
-  text-align: center;
-  display: flex;
-  justify-content: center; // keeps app in the center
-  align-items: center;
-  font-family: 'Merriweather', serif;
-  height: 100vh;
-  //width: 100vw;
-
   //following are to make sure the image stays in the background
   background: url(./image_svg/background.jpg) no-repeat center center;
   -webkit-background-size: cover;
@@ -25,6 +17,16 @@ body{
   background-attachment: fixed;
   background-size: cover;
   // ---------------------------------------------------------- //
+  
+  text-align: center;
+  display: flex;
+  justify-content: center; // keeps app in the center
+  align-items: center;
+  font-family: 'Merriweather', serif;
+  height: 100vh;
+  width: 100vw;
+
+  
 }
 
 .login {
@@ -50,6 +52,45 @@ body{
     width: 100%;
     z-index: 99;
     padding: 17px 10px;
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 60%;
+    background-color: #536DFE;// white;// #3498db;
+    width: 100%;
+    position: absolute;
+    right: -34%;
+    border-radius: 6px;
+    z-index: 1;
+    transition: all 400ms ease-in-out;
+    cursor: pointer;
+    box-shadow: 0px 0px 15px 2px rgba(15, 15, 15, 0.281);
+    
+    &.right {
+      right: -40%;
+      align-items: flex-end;
+      &:hover {
+        right: -45%;
+      }
+    }
+    &.left {
+      right: 40%;
+      align-items: flex-start;
+      &:hover {
+        right: 45%;
+      }
+    }
+
+    .text {
+      font-size: 21px;
+      font-weight: 500;
+      color: rgb(230, 233, 239);// #fff;
+      margin-right: 2em;
+      margin-left: 3em;
+    }
   }
 }
 

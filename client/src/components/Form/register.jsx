@@ -1,14 +1,14 @@
 import React from 'react';
 
 //helper functions
-import submitHelper from './submitHelper';
-import checkData from './checkData';
+import submitHelper from './Helper/submitHelper';
+import checkData from './Helper/checkData';
 
 //svg files
-import user from '../../image_svg/user.svg';
+import user from '../../image_svg/register.svg';
 import success from '../../image_svg/success.svg';
 
-export class Form extends React.Component {
+export class Register extends React.Component {
     
     constructor(props) {
         super(props);
@@ -94,7 +94,7 @@ export class Form extends React.Component {
                     </div>
                 </div>
                 :
-                <div className="reg-container">
+                <div className="reg-container" ref={this.props.containerRef}>
                     <div className="header">Register Account</div>
                     <div className="content">
                         <div className="image">
