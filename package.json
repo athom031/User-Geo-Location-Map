@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "brew services restart mongodb-community@4.2 && cd server && nodemon app.js && cd ..",
     "client": "cd client && export PORT=3001 && npm start && cd ..",
-    "visualization": "cd visualization && npm start",
+    "visualization": "cd visualization && export PORT=3002 && npm start && cd ..",
     "dev": "concurrently -n 'server,client,visualization' -c 'red,green,blue' \"npm run server\" \"npm run client\" \"npm run visualization\"",
     "start": "npm run dev"
   },
@@ -30,5 +30,6 @@
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.0",
     "xmlhttprequest": "^1.8.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -35,7 +35,40 @@
                 font-size: 20px;
                 font-weight: bold;
             }
-        }   
+        }  
+        
+        .edit-container {
+            margin-top: 2em;
+            margin-bottom: 10px;
+            width: 15em;
+            background-color: white;
+            border-radius: 30px;
+            padding: 10px 10px;
+            .editInfo {
+                font-size: 20px;
+                //font-weight: bold;
+            }
+            .editbtn {
+                font-size: 15px;
+                font-weight: 550;
+                //align-items: center;
+                padding: 5px 5em;
+                border: 0;
+                background-color: #3b4eb8; 
+                color: rgb(230, 233, 239);// #fff;
+                border-radius: 20px;
+                margin-top: 10px;
+                //margin-bottom: 100px;
+                transition: all 250ms ease-in-out;
+                cursor: pointer;
+                &:hover {
+                  background-color: #536DFE;
+                }
+                &:focus {
+                  outline: none;
+                } 
+            }
+        }
     }
     
 }
@@ -117,6 +150,129 @@
             color:rgb(168, 41, 41);
             border-radius: 5px;
             padding: 10px 10px;
+        }
+    }
+}
+
+.change-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 100;
+
+    
+    .header { 
+        font-size: 24px;
+        font-family: 'Merriweather', serif;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .image {
+            width: 18em;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .form {
+            margin-top:2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: fit-content;
+                label {
+                    font-size: 14px;
+                }
+                input {
+                    margin-top: 6px;
+                    min-width: 18em;
+                    height: 37px;
+                    padding: 0px 10px;
+                    font-size: 12px;
+                    font-family: 'Merriweather', serif;
+                    background-color: #f3f3f3;
+                    border: 0;
+                    //border-color: red;
+                    border-radius: 4px;
+                    margin-bottom: 10px;
+                    transition: all 250ms ease-in-out;
+                    &:hover {
+                        background-color: #ffffff;
+                        box-shadow: 0px 0px 5px 5px #6182ba96;
+                    }
+                    &:focus {
+                        background-color: #ffffff;
+                        outline: none;
+                        box-shadow: 0px 0px 12px .8px #6182ba96;
+                    }
+                }
+            }
+        }
+
+        .message { 
+            margin-top: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #536DFE;
+              
+        }
+
+        .changed-container {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 15em;
+            background-color: white;
+            border-radius: 30px;
+            padding: 10px 10px;
+            
+            .userInfo {
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+
+        .error { 
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: white;
+            color:rgb(168, 41, 41);
+            border-radius: 5px;
+            padding: 10px 10px;
+        }
+
+        .changebtn {
+            font-size: 15px;
+            font-weight: 550;
+            //align-items: center;
+            padding: 5px 4em;
+            border: 0;
+            background-color: #3b4eb8; 
+            color: rgb(230, 233, 239);// #fff;
+            border-radius: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            transition: all 250ms ease-in-out;
+            cursor: pointer;
+            &:hover {
+                background-color: #536DFE;
+            }
+            &:focus {
+                outline: none;
+            }   
         }
     }
 }

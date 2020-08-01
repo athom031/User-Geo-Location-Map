@@ -14,9 +14,9 @@ passport.use(
                     if(err) 
                         return done(err); // error case
                     else if(!user)
-                        return done(null, false, { message: 'User is not registered' }); // unknown user
+                        return done(null, false, { message: 'ERROR: User is not registered' }); // unknown user
                     else if(!user.verifyPassword(password)) 
-                        return done(null, false, { message: 'Password is incorrect.' }); // user found but password passed is incorrect
+                        return done(null, false, { message: 'ERROR: Password is incorrect.' }); // user found but password passed is incorrect
                     else 
                         return done(null, user); // successful authentication
                 });

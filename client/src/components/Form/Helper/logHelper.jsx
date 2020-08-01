@@ -1,5 +1,7 @@
 //mongodb://localhost:27017/MEANStackDB
 
+import signinHelper from './signinHelper';
+
 function logHelper(form, data) {
     // we are sending confPassword to post, but not part of model
     
@@ -23,6 +25,9 @@ function logHelper(form, data) {
                 logSuccess: true 
             })
             console.log(this.responseText);
+            
+            signinHelper(form, data);
+
         }
         else if(xhr.readyState === 4) { 
             form.setState({

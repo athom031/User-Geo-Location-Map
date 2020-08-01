@@ -15,6 +15,11 @@ router.post('/authenticate', ctrlUser.authenticate);
 router.post('/signin', ctrlUser.signin);
 router.post('/signoff', ctrlUser.signoff);
 
+//updateUserInfo
+router.post('/changeName', ctrlUser.changeName);
+router.post('/changePassword', ctrlUser.changePassword);
+router.post('/changeAddress', ctrlUser.changeAddress);
+
 router.get('/userProfile', jwtHelper.verifyJwtToken, ctrlUser.userProfile); //defines route function
 //function will be passed before ctrlUser.userProfile
     //verify jwt token defined in config jwtHelper

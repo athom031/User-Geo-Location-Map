@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const fetch    = require('node-fetch');
 //ES8 have to install async and import fetch
 
-var MongoClient = require('mongodb').MongoClient;
+const bcrypt = require('bcryptjs');
+//needed to encrypt password and keep secret in database
 
 const passport = require('passport'); //login passport library
 
@@ -126,9 +127,9 @@ module.exports.userProfile = (req, res, next) => {
 module.exports.signin = (req, res, next) => {
     User.updateOne({userName: req.body.userName}, { $set: {online: true} }, function(err, response) {
         if(err)
-            return res.status(400).json({ status: false, message: 'Signin Error'});
+            return res.status(400).json({ status: false, message: 'ERROR: Signin Error'});
         else if(response.n === 0)
-            return res.status(404).json({ status: false, message: 'User not found' });
+            return res.status(404).json({ status: false, message: 'ERROR: User not found' });
         else 
             return res.status(200).json({ status: true, message: `${req.body.userName} is now online` });
     });
@@ -137,10 +138,80 @@ module.exports.signin = (req, res, next) => {
 module.exports.signoff =  (req, res, next) => {
     User.updateOne({userName: req.body.userName}, { $set: {online: false} }, function(err, response) {
         if(err)
-            return res.status(400).json({ status: false, message: 'Signoff Error'});
+            return res.status(400).json({ status: false, message: 'ERROR: Signoff Error'});
         else if(response.n === 0)
-            return res.status(404).json({ status: false, message: 'User not found' });
+            return res.status(404).json({ status: false, message: 'ERROR: User not found' });
         else 
             return res.status(200).json({ status: true, message: `${req.body.userName} is now offline` });
     });
+}
+
+module.exports.changeName = (req, res, next) => {
+    User.updateOne({userName: req.body.userName}, { $set: {fullName: req.body.fullName} }, function(err, response) {
+        if(err)
+            return res.status(400).json({ status: false, message: 'ERROR: Name Change Error'});
+        else if(response.n === 0)
+            return res.status(404).json({ status: false, message: 'ERROR: User not found' });
+        else 
+            return res.status(200).json({ status: true, message: `${req.body.userName}'s name is now ${req.body.fullName}` });
+    });
+}
+
+module.exports.changePassword = (req, res, next) => {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+            let password = hash;
+            let saltS = salt;
+            User.updateOne({userName: req.body.userName}, { $set: {password: password, saltSecret: saltS} }, function(err, response) {
+                if(err)
+                    return res.status(400).json({ status: false, message: 'ERROR: Password Change Error'});
+                else if(response.n === 0)
+                    return res.status(404).json({ status: false, message: 'ERROR: User not found' });
+                else 
+                    return res.status(200).json({ status: true, message: `${req.body.userName}'s password has changed` });
+            });
+        });
+    }); 
+}
+
+module.exports.changeAddress= async (req, res, next) => {
+
+    let data = await getCountry(req.body.address);
+    //call async function and only continue until returned promise is resolved
+
+    if(data === 'err' || data.status != 'OK' || data.results[0].address_components.length < 7) {
+        // many things tested here: 
+            //incase there is error in promise
+            //search gets no results
+            //search results is too general
+        return res.status(422).json({ status: false, message: 'ERROR: Address Format Incorrect, ie: not specific enough' });
+    }
+    else {
+        let country = '';
+        data.results[0].address_components.forEach(elem => {
+            if(elem.types[0] === 'country') {
+                country = elem.long_name;
+            }
+        });
+        //get country field to check if in US (not always in same place (ie: apartment vs home))
+                
+        //set user location data
+        let address = data.results[0].formatted_address;
+
+        let latCoord = data.results[0].geometry.location.lat;
+        let lngCoord = data.results[0].geometry.location.lng;
+            
+        if(country != 'United States') {
+            return res.status(422).json({ status: false, message: 'ERROR: Address must be in the U.S.' }); //address check
+        }   
+        
+        User.updateOne({userName: req.body.userName}, { $set: { address: address, latCoord: latCoord, lngCoord: lngCoord } }, function(err, response) {
+                if(err)
+                    return res.status(400).json({ status: false, message: 'ERROR: Address Change Error'});
+                else if(response.n === 0)
+                    return res.status(404).json({ status: false, message: 'ERROR: User not found' });
+                else 
+                    return res.status(200).json({ status: true, message: `${req.body.userName}'s address has changed` });
+        });
+    } 
 }
