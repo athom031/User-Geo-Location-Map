@@ -1,12 +1,11 @@
 # User Localization Visualization Tool
 
 This project is to create a visual map of users which includes:
-1) A web page where users can register with their information (username, name, password, US address).
-2) A way to use the address to store lat long location of users. ap that shows product users on the US map (using lat long).
-3) A way for users to edit their own information.
-4) A map to display location of users
-5) A dummy website for users to log into.
-6) A color code that shows which of the users on the map are active.
+1) Web page where users can register with their information (username, name, password, US address).
+2) Database that holds user data along with their lat/long geocode.
+3) Frontend interface for users to login and edit their own information.
+4) Map to display location of users.
+6) Online User data which shows which users are online on the map.
 
 ## Getting Started
 
