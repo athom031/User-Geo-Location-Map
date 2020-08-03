@@ -1,12 +1,12 @@
-function signinHelper(form, data) {
-    let d =  JSON.parse(data);
-    let user = `{ "userName" : "${d.userName}" }`;
+function signinHelper(form, d) {
 
-    //create the xhr object
+    var data = JSON.stringify( { "userName": JSON.parse(d).userName } );
+    
+    //create xml http request object (xhr)
     let xhr  = new XMLHttpRequest();
+    //without http:// -> Access-Control-Allow-Origin error
     let url =  'http://localhost:3000/api/signin';
-    //if don't have the http:// -> Access-Control-Allow-Origin error
-
+    
     //open a connection
     xhr.open("POST", url, true);
 
@@ -15,18 +15,10 @@ function signinHelper(form, data) {
 
     //create state change callback
     xhr.onreadystatechange = function () {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-            form.setState({
-                signSuccess: true 
-            })
-            console.log(this.responseText) 
-        }
-        else if(xhr.readyState === 4) { 
-            console.log(JSON.parse(this.responseText).message);
-            form.setState({
-                signError: JSON.parse(this.responseText).message
-            });
-        }
+        if(xhr.readyState === 4 && xhr.status === 200)
+            form.setState( { signSuccess: true } );
+        else if(xhr.readyState === 4)
+            form.setState( { signError: JSON.parse(this.responseText).message } );
     };
     
     xhr.send(data);

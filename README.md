@@ -117,6 +117,13 @@ React Login Registration Form
 Import outside of React src folder
 * https://stackoverflow.com/questions/44114436/the-create-react-app-imports-restriction-outside-of-src-directory
 
+Integrating Google Maps API into React
+* https://www.digitalocean.com/community/tutorials/how-to-integrate-the-google-maps-api-into-react-applications
+
+Implementing Custom Google Map Api Style
+* https://towardsdatascience.com/how-to-use-the-google-maps-api-with-custom-styling-in-react-js-f6e7e59273df
+
+
 ## Inspiration: 
 Mean Stack User Registration
 * https://www.youtube.com/watch?v=m34FCkBd7UU&t=1839s

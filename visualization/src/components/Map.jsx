@@ -70,7 +70,7 @@ export class MapContainer extends Component {
             <div className = "map-object">
                 <div className = "map" style = {{
                         marginTop:".5em",
-                        height: "35em",
+                        height: "25em",
                         marginLeft: "12em",
                         marginRight: "12em",
                         marginBottom: "1em",
@@ -80,7 +80,7 @@ export class MapContainer extends Component {
                 >
                     <Map
                         google={this.props.google}
-                        zoom={4.5}
+                        zoom={4}
                         styles={customMapStyle}
                         initialCenter={{
                             lat: 39.2,

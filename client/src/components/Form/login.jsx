@@ -7,12 +7,11 @@ import signoffHelper from './Helper/signoffHelper';
 //svg files
 import user from '../../image_svg/login.svg';
 import success from '../../image_svg/signin.svg';
-import change from '../../image_svg/change.svg';
 
 //change files
-import { ChangeNameForm } from './Helper/change/changeName';
-import { ChangePasswordForm } from './Helper/change/changePasswod';
-import { ChangeAddressForm } from './Helper/change/changeAddress';
+import { ChangeNameForm } from './Helper/changeUserData/changeName';
+import { ChangePasswordForm } from './Helper/changeUserData/changePasswod';
+import { ChangeAddressForm } from './Helper/changeUserData/changeAddress';
 
 export class Login extends React.Component {
     
@@ -20,44 +19,41 @@ export class Login extends React.Component {
         super(props);
 
         this.state = {
-            userName:     '',
-            password:     '',
-            error: '',
-            logSuccess: false,
-            signError: '',
-            signSuccess: false,
-            changeName: false,
-            changeAddress: false,
+            userName:       '',
+            password:       '',
+            errorCheck:          '',
+            logSuccess:     false,
+            signError:      '',
+            signSuccess:    false,
+            changeName:     false,
+            changeAddress:  false,
             changePassword: false
         }
     }
     
-    //Form Controlled Components    
-    //when handler is assigned to on change event, event itself is passed as param    
-    handleUsernameChange = event => { this.setState({ userName: event.target.value }) }
-    
-    handlePasswordChange = event => { this.setState({ password: event.target.value }) }
+    //Form Controlled Components, event is passed as param    
+    handleUsernameChange = event => { this.setState( { userName: event.target.value } ) }
+    handlePasswordChange = event => { this.setState( { password: event.target.value } ) }
     
     handleSubmit = event => {    
-        var data = JSON.stringify({ "userName": this.state.userName, "password": this.state.password });
+        var data = JSON.stringify( { "userName": this.state.userName, "password": this.state.password } );
         
         logHelper(this, data);
         event.preventDefault();
     }
 
     signoff = event => {
-        //signoffHelper(this, data);
-        var data = JSON.stringify({ "userName" : this.state.userName });
-        signoffHelper(this, data);
+        var data = JSON.stringify( { "userName" : this.state.userName } );
+        signoffHelper(data);
         this.setState ({
-            userName:     '',
-            password:     '',
-            error: '',
-            logSuccess: false,
-            signError: '',
-            signSuccess: false,
-            changeName: false,
-            changeAddress: false,
+            userName:       '',
+            password:       '',
+            errorCheck:     '',
+            logSuccess:     false,
+            signError:      '',
+            signSuccess:    false,
+            changeName:     false,
+            changeAddress:  false,
             changePassword: false
         })
     }
@@ -70,30 +66,15 @@ export class Login extends React.Component {
         })
     }
 
-    changeA = event => {
-        this.setState({
-            changeAddress: true
-        })
-    }
-    
-    changeN = event => {
-        this.setState({
-            changeName: true
-        })
-    }
-    
-    changeP = event => {
-        this.setState({
-            changePassword: true
-        })
-    }
+    changeA = event => { this.setState( { changeAddress: true } ) }
+    changeN = event => { this.setState( { changeName: true } ) }
+    changeP = event => { this.setState( { changePassword: true } ) }
 
     render() {
         const isLogSuccess = this.state.logSuccess;
-        const errorCheck = this.state.error;
         const isSignSuccess = this.state.signSuccess;
         
-        const { userName,  password, changeName, changeAddress, changePassword, signError } = this.state;
+        const { userName,  password, errorCheck, signError, changeName, changeAddress, changePassword } = this.state;
 
         return(
             <div>
@@ -105,14 +86,13 @@ export class Login extends React.Component {
                             <div>
                                 {changeAddress
                                 ?
-                                <div className="suc-container">
-                                        <div>
+                                    <div>
                                         <div>
                                             <ChangeAddressForm userName ={userName} />
                                         </div>
                                         <button type="button" onClick={this.cancel} className="btn">Home Page</button>
                                     </div>
-                                </div>
+                                
                                 :
                                 <div>
                                     {changePassword
@@ -195,7 +175,7 @@ export class Login extends React.Component {
                         <div>
                             {errorCheck === ''
                             ?
-                            <div/>
+                                <div/>
                             : 
                             <div className="error">
                                 {errorCheck}

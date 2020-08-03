@@ -1,10 +1,9 @@
 function submitHelper(form, data) {
-    // we are sending confPassword to post, but not part of model
     
-    //create the xhr object
+    //create xml http request object (xhr)
     let xhr  = new XMLHttpRequest();
+    //without http:// -> Access-Control-Allow-Origin error
     let url =  'http://localhost:3000/api/register';
-    //if don't have the http:// -> Access-Control-Allow-Origin error
 
     //open a connection
     xhr.open("POST", url, true);
@@ -14,13 +13,8 @@ function submitHelper(form, data) {
 
     //create state change callback
     xhr.onreadystatechange = function () {
-        if(xhr.readyState === 4 && xhr.status === 200) {
-            //console.log("Sending Data:")
-            //console.log(this.responseText);
-            form.setState({
-                regSuccess: true 
-            })
-        }
+        if(xhr.readyState === 4 && xhr.status === 200)
+            form.setState( { regSuccess: true } );
         else if(xhr.readyState === 4 && xhr.status === 422) {
             form.setState({
                 error: this.responseText.substring(2, this.responseText.length-2)

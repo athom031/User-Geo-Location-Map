@@ -9,15 +9,12 @@ class App extends React.Component {
       isLogginActive: true,
     }
   }
-  //this.rightSide.classList.add("right")
-  //have small error that starts with blue box with no name
-  //upon a double toggle, it acts fight so lets start with a default
 
-  //componentDidMount() is a function called because of React.component
-  //called immediately after component is mounted/inserted into tree
+  /* componentDidMount called immediately when component is mounted/inserted into tree
+     to make sure that we start with default register on the right 
+  */
   componentDidMount() {
     this.rightSide.classList.add("right");
-    //tells us that we want the tab on the right to show which should now have register text
   }
 
   changeState() {
@@ -37,11 +34,7 @@ class App extends React.Component {
   render() {
     const { isLogginActive } = this.state;
     const current = isLogginActive ? "Register" : "Login"; //the tab that will show on the side
-    const currentActive = isLogginActive ? "login" : "register";//the page that is showing opp of what we will transition to on click
-    //<div>
-    //  <RightSide current={current} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)}/> 
-    //</div>
-    //<RightSide current={current} containerRef={ref => this.rightSide = ref} onClick={this.changeState.bind(this)}/>
+    
     return (
       <div className="App">
         <div className="login">
@@ -54,11 +47,9 @@ class App extends React.Component {
       </div>
     )
   }
-  
 };
 
- 
-//function with props as single param
+//the box to click that switches between login and register
 const RightSide = props => {
   return <div className="right-side" ref = {props.containerRef} onClick={props.onClick}>
     <div className="inner-container">
