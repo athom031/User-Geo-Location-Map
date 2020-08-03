@@ -1,9 +1,13 @@
 //export/import not default in node js so use module.exports/require
-require('./config/config'); //config env variable
 
-require('./models/db'); //connect to mongo db
+//config env variable
+require('./config/config'); 
 
-require('./config/passportConfig'); //we are using passport for our login authentication
+//connect to mongo db
+require('./models/db'); 
+
+//we are using passport for our login authentication
+require('./config/passportConfig'); 
 
 //express server -> create middleware app
 const express = require('express');
@@ -11,8 +15,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport'); //login
 
-const rtsIndex = require('./routes/indexRouter');
 //html request to register mongo db data point
+const rtsIndex = require('./routes/indexRouter');
 
 var app = express();
 
@@ -23,10 +27,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize()); //login
 app.use('/api', rtsIndex);
-
-//post request: /api/register
-//'/api/register' will be the user request handled by usrctrl.register
-
 
 //error handler
 app.use((err, req, res, next) => {
