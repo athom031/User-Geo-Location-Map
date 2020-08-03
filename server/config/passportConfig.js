@@ -6,18 +6,24 @@ const mongoose = require('mongoose');
 var User = mongoose.model('User');
 
 passport.use(
-    new localStrategy({ usernameField: 'userName' }, //the unique key to search db for 
-        (username, password, done) => { //function called to authenticate password
-            User.findOne({ userName: username }, //find the user model that has the unique userName entered
-                (err, user) => { // either returns err or the user found 
+    //the unique key to search db for 
+    new localStrategy({ usernameField: 'userName' }, 
+        //function called to authenticate password
+        (username, password, done) => { 
+            //find the user model that has the unique userName entered
+            User.findOne({ userName: username },
+                (err, user) => { 
                     if(err) 
-                        return done(err); // error case
+                        //error on db, db not searched
+                        return done(err); 
                     else if(!user)
-                        return done(null, false, { message: 'ERROR: User is not registered' }); // unknown user
+                        //db is searched but user is not found
+                        return done(null, false, { message: 'ERROR: User is not registered' }); 
                     else if(!user.verifyPassword(password)) 
+                        //user is found but the password does not match
                         return done(null, false, { message: 'ERROR: Password is incorrect.' }); // user found but password passed is incorrect
                     else 
-                        return done(null, user); // successful authentication
+                        return done(null, user);
                 });
         })
 );
