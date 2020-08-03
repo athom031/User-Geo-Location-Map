@@ -4,14 +4,12 @@
 }
 .btn {
     font-size: 20px;
-    //align-items: center;
     padding: 10px 20px;
     border: 0;
     background-color: #536DFE;
-    color: #212121;// #fff;
+    color: #212121;
     border-radius: 20px;
     margin-top: 10px;
-    //margin-bottom: 100px;
     transition: all 250ms ease-in-out;
     cursor: pointer;
     &:hover {

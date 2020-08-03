@@ -8,7 +8,6 @@ import './styles/Map.scss';
 
 import getData from "./userData/get";
 
-
 export class MapContainer extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +20,6 @@ export class MapContainer extends Component {
         }
 
     }
-
     
     onMarkerClick = (props, marker, e) =>
         this.setState({
@@ -52,15 +50,17 @@ export class MapContainer extends Component {
             let info = `${coord.fullName} (${coord.userName}) is ${coord.online ? 'online' : 'offline'}.`
         
             return <Marker key={index} id={index} position={{
-                lat: coord.latCoord,
-                lng: coord.lngCoord
-            }}
-            icon = {{
-                url: (coord.online) ? "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" : "http://labs.google.com/ridefinder/images/mm_20_gray.png"
-            }}
-            onClick={this.onMarkerClick}
-            name = {info}
-
+                    lat: coord.latCoord,
+                    lng: coord.lngCoord
+                }}
+                icon = {{
+                    url: (coord.online) ? 
+                        "http://maps.google.com/mapfiles/ms/icons/blue-dot.png" 
+                        : 
+                        "http://labs.google.com/ridefinder/images/mm_20_gray.png"
+                }}
+                onClick={this.onMarkerClick}
+                name = {info}
             />
         })
     }
@@ -71,11 +71,9 @@ export class MapContainer extends Component {
                 <div className = "map" style = {{
                         marginTop:".5em",
                         height: "25em",
-                        marginLeft: "12em",
-                        marginRight: "12em",
-                        marginBottom: "1em",
-                        position: "relative",
-                        overflow: "hidden",
+                        marginLeft: "8em",
+                        marginRight: "8em",
+                        position: "relative"
                     }}
                 >
                     <Map
@@ -91,11 +89,13 @@ export class MapContainer extends Component {
                     >
                         {this.displayMarkers()}
                         <InfoWindow
-                        marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}
-                        onClose={this.onClose}
+                            marker={this.state.activeMarker}
+                            visible={this.state.showingInfoWindow}
+                            onClose={this.onClose}
                         >
-                            <h4>{this.state.selectedPlace.name}</h4>
+                            <h4>
+                                {this.state.selectedPlace.name}
+                            </h4>
                         </InfoWindow>
                     </Map>
                 </div>

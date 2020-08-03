@@ -1,3 +1,4 @@
+//custom style from https://mapstyle.withgoogle.com/
 let customMapStyle = [
     {
     "elementType": "geometry",

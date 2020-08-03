@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 
+//server side posts all of the mongo db nodes, and now request from the front end
 const getData = async () => {
     let url = 'http://localhost:3000/api/data';
     try {

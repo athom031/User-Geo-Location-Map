@@ -5,8 +5,6 @@ body{
   background-color: black;
 }
 .App {
-
-  //following are to make sure the image stays in the background
   background-color: black;
   color: #536DFE;
   text-align: center;
@@ -43,12 +41,9 @@ body{
       }
     }
   }
-  // ---------------------------------------------------------- //
   .Map-Container {
       display: flex;
       flex-direction: column;
-      padding-left:4em;
-      padding-right:4em;
       padding-bottom: 2em;
   }
 }
