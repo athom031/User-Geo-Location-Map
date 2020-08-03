@@ -1,10 +1,9 @@
 //configurate the passport and use local passport strategy
-
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 
-var User = mongoose.model('User'); //we interact with our mongo db 
+var User = mongoose.model('User');
 
 passport.use(
     new localStrategy({ usernameField: 'userName' }, //the unique key to search db for 

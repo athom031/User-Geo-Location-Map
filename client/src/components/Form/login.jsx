@@ -1,18 +1,18 @@
 import React from 'react';
 
 //helper functions
-import logHelper from './Helper/logHelper';
-import signoffHelper from './Helper/signoffHelper';
+import logHelper from './Helper/Login/logHelper';
+import signoffHelper from './Helper/Login/signoffHelper';
 
 //svg files
-import user from '../../image_svg/login.svg';
-import success from '../../image_svg/signin.svg';
+import user from './image_svg/login.svg';
+import success from './image_svg/signin.svg';
 
 //change files
-import { ChangeNameForm } from './Helper/changeUserData/changeName';
-import { ChangePasswordForm } from './Helper/changeUserData/changePasswod';
-import { ChangeAddressForm } from './Helper/changeUserData/changeAddress';
+import { ChangeNameForm, ChangePasswordForm, ChangeAddressForm } from './Helper/Login/changeUserData';
 
+
+/*login form if right side is clicked will switch to register form */
 export class Login extends React.Component {
     
     constructor(props) {

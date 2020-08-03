@@ -1,13 +1,15 @@
 import React from 'react';
 
 //helper functions
-import submitHelper from './Helper/submitHelper';
-import checkData from './Helper/checkData';
+import submitHelper from './Helper/Register/submitHelper';
+import checkData from './Helper/Register/checkData';
 
 //svg files
-import user from '../../image_svg/register.svg';
-import success from '../../image_svg/success.svg';
+import user from './image_svg/register.svg';
+import success from './image_svg/success.svg';
 
+
+/*register form if right side is clicked will switch to login form */
 export class Register extends React.Component {
     
     constructor(props) {

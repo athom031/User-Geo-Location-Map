@@ -1,8 +1,9 @@
 import React from 'react';
 
 //svg files
-import change from '../../../../image_svg/change.svg';
+import change from '../../../image_svg/change.svg';
 
+/* Form to Change Password that is called from login.jsx after successful login */
 export class ChangePasswordForm extends React.Component {
     constructor(props) {
         super(props);

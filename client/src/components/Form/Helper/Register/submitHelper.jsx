@@ -1,3 +1,4 @@
+/*takes register form data to register user on server side*/
 function submitHelper(form, data) {
     
     //create xml http request object (xhr)
