@@ -8,9 +8,12 @@ This project is to create a visual map of users which includes:
 5) Online User data which shows which users are online on the map.
 
 ## Demo Images
-![Visualization](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Visualization.png)
-![Login](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Login.png)
+1. Interface to register users and save user data to mongoDB. 
 ![Register](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Register.png)
+2. User Homepage where they can update their information.
+![Login](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Login.png)
+3. Client application that visualizes user location and activity. 
+![Visualization](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Visualization.png)
 
 ## Getting Started
 
