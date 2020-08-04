@@ -18,7 +18,7 @@ This project is to create a visual map of users which includes:
 
 ### Prerequisites
 
-Run command located in package.json 
+Run command located in package.json:
 ```
 npm run setup
 ```
@@ -28,7 +28,7 @@ to install all of the required libraries
 
 1. Update API.js with your own API key created at the beginning of the getting started section.
 2. Update the config file in the server side on what is the link to the Mongo DB as the MONGO URI
-3. Run the command to install all of the required libraries<br/>
+3. Run the command to install all of the required libraries: <br/>
 ```
 npm run setup
 ```
@@ -36,36 +36,45 @@ npm run setup
 - PORT 3000 => backend <br/>
 - PORT 3001 => user registration/login front end <br/>
 - PORT 3002 => client user map front end <br/>
-if you have things running on those ports run the command to kill those local ports
+if you have things running on those ports run the command to kill those local ports:
  <br/>
 
 ```
 npm run clear
 ```
 
-5. Run the command to concurrently run the application (frontend and backend).
+5. Run the command to concurrently run the application (frontend and backend):
 ```
 "npm run dev" 
 ```
 
 ## Built With
+These libraries are all installed in the package.json command:
+```
+npm run setup
+```
 
 ### Server Side
+* [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+* [passport](https://www.npmjs.com/package/passport) / [passport-local](https://www.npmjs.com/package/passport-local)
+* [mongoose](https://www.npmjs.com/package/mongoose)
+* [lodash](https://www.npmjs.com/package/lodash)
+* [node-fetch](https://www.npmjs.com/package/node-fetch)
+* [bcryptjs](https://www.npmjs.com/package/bcryptjs)
+* [express](https://www.npmjs.com/package/express)
+* [body-parser](https://www.npmjs.com/package/body-parser)
+* [cors](https://www.npmjs.com/package/cors)
 
 ### Client Side
+* [react](https://www.npmjs.com/package/react)
 
 ### Visualization
+* [google-maps-react](https://www.npmjs.com/package/google-maps-react)
+* [customize-cra](https://www.npmjs.com/package/customize-cra)
+* [react-app-rewired](https://www.npmjs.com/package/react-app-rewired)
 
 ### Total Application 
-* mongoose
-* express
-* bodyparser
-* concurrency
-* axios
-* bcrypt
-* google-maps-react
-* react-app-rewired
-* customize-cra
+* [concurrently](https://www.npmjs.com/package/concurrently)
 
 
 
