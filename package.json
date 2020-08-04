@@ -5,7 +5,11 @@
   "main": "API.js",
   "scripts": {
     "serv-setup": "npm i jsonwebtoken passport passport-local mongoose lodash node-fetch bcryptjs express body-parser cors --save",
-    "setup": "npm i && cd server && npm run serv-setup && cd .. && cd visualization && npm i && cd .. && cd client && npm i && cd .. && clear",
+    "setup": "npm i && npm run serv-setup && cd server && npm run serv-setup && cd .. && cd visualization && npm i && cd .. && cd client && npm i && cd .. && clear",
+    "clear-server": "kill -9 $(lsof -i:3000 -t) 2> /dev/null",
+    "clear-client": "kill -9 $(lsof -i:3001 -t) 2> /dev/null",
+    "clear-visual": "kill -9 $(lsof -i:3002 -t) 2> /dev/null",
+    "clear": "npm run clear-server && npm run clear-client && npm clear-visual",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "brew services restart mongodb-community@4.2 && cd server && nodemon app.js && cd ..",
     "client": "cd client && export PORT=3001 && npm start && cd ..",

@@ -5,68 +5,59 @@ This project is to create a visual map of users which includes:
 2) Database that holds user data along with their lat/long geocode.
 3) Frontend interface for users to login and edit their own information.
 4) Map to display location of users.
-6) Online User data which shows which users are online on the map.
+5) Online User data which shows which users are online on the map.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+1) Be sure to install mongoose on your system.
+* https://treehouse.github.io/installation-guides/mac/mongo-mac.html
+2) Get a google api key.
+* https://developers.google.com/maps/documentation/javascript/get-api-key
+3) Make a Mongo DB and create a collection called 'users'.
+* https://www.mongodb.com/products/compass
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
+Run command located in package.json 
 ```
-Give examples
+npm run setup
 ```
+to install all of the required libraries
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+1) Update API.js with your own API key created at the beginning of the getting started section.
+2) Update the config file in the server side on what is the link to the Mongo DB as the MONGO URI.
+2) Run command 
 ```
-Give the example
+npm run setup
 ```
+to install all of the required libraries
+3) This application runs on the following ports:
+    - PORT 3000 => backend
+    - PORT 3001 => user registration/login front end
+    - PORT 3002 => client user map front end
 
-And repeat
-
+    if you have things running on those ports run command 
+    ```
+    npm run clear
+    ```
+    to kill those local ports
+7) Run command 
 ```
-until finished
+"npm run dev" 
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+to concurrently run the application (frontend and backend).
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+### Server Side
 
+### Client Side
+
+### Visualization
+
+### Total Application 
 * mongoose
 * express
 * bodyparser
@@ -81,17 +72,16 @@ Add additional notes about how to deploy this on a live system
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/athom031/UserRegLatLong/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
 * **Alex Thomas** - [Github](https://github.com/athom031)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/athom031/UserRegLatLong/blob/master/LICENSE.md) file for details
 
 ## Acknowledgments
 How to deal with waiting on the promise call:
