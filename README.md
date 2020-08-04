@@ -7,6 +7,11 @@ This project is to create a visual map of users which includes:
 4) Map to display location of users.
 5) Online User data which shows which users are online on the map.
 
+## Demo Images
+![Visualization](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Visualization.png)
+![Login](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Login.png)
+![Register](https://github.com/athom031/UserRegLatLong/blob/master/demo_img/Register.png)
+
 ## Getting Started
 
 1) Be sure to install mongoose on your system.
