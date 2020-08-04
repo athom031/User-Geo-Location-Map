@@ -26,28 +26,27 @@ to install all of the required libraries
 
 ### Installing
 
-1) Update API.js with your own API key created at the beginning of the getting started section.
-2) Update the config file in the server side on what is the link to the Mongo DB as the MONGO URI.3) Run command 
+1. Update API.js with your own API key created at the beginning of the getting started section.
+2. Update the config file in the server side on what is the link to the Mongo DB as the MONGO URI
+3. Run the command to install all of the required libraries<br/>
 ```
 npm run setup
 ```
-to install all of the required libraries<br/>
-4) This application runs on the following ports: <br/>
+4. This application runs on the following ports: <br/>
 - PORT 3000 => backend <br/>
 - PORT 3001 => user registration/login front end <br/>
 - PORT 3002 => client user map front end <br/>
-if you have things running on those ports run command <br/>
+if you have things running on those ports run the command to kill those local ports
+ <br/>
 
 ```
 npm run clear
 ```
 
-to kill those local ports
-5) Run command 
+5. Run the command to concurrently run the application (frontend and backend).
 ```
 "npm run dev" 
 ```
-to concurrently run the application (frontend and backend).
 
 ## Built With
 
