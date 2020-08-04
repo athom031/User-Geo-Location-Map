@@ -34,8 +34,8 @@ to install all of the required libraries
 
 ### Installing
 
-1. Update API.js with your own API key created at the beginning of the getting started section.
-2. Update the config file in the server side on what is the link to the Mongo DB as the MONGO URI
+1. Update API.js with your own [API key](https://github.com/athom031/UserRegLatLong/blob/master/API.js).
+2. Update the [config file](https://github.com/athom031/UserRegLatLong/blob/master/server/config/config.json) in the server side on what is the link to the Mongo DB as the MONGO URI.
 3. Run the command to install all of the required libraries: <br/>
 ```
 npm run setup
