@@ -21,7 +21,7 @@ function logHelper(form, data) {
             signinHelper(form, data);
         }
         else if(xhr.readyState === 4) { 
-            form.setState( { error: JSON.parse(this.responseText).message } );
+            form.setState( { errorCheck: JSON.parse(this.responseText).message } );
         }
     };
     
