@@ -53,7 +53,7 @@ npm run clear
 
 5. Run the command to concurrently run the application (frontend and backend):
 ```
-"npm run dev" 
+npm run dev
 ```
 
 ## Built With
