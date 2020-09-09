@@ -40,7 +40,8 @@ to install all of the required libraries
 ```
 npm run setup
 ```
-4. This application runs on the following ports: <br/>
+4. Download [mongodb](https://docs.mongodb.com/v4.2/tutorial/install-mongodb-on-os-x/). The version downloaded matters for "npm run dev" command and should change this script accordingly in package.json.
+5. This application runs on the following ports: <br/>
 - PORT 3000 => backend <br/>
 - PORT 3001 => user registration/login front end <br/>
 - PORT 3002 => client user map front end <br/>
@@ -51,7 +52,7 @@ if you have things running on those ports run the command to kill those local po
 npm run clear
 ```
 
-5. Run the command to concurrently run the application (frontend and backend):
+6. Run the command to concurrently run the application (frontend and backend):
 ```
 npm run dev
 ```
