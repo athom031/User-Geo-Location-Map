@@ -46,12 +46,9 @@ npm run setup
 - PORT 3001 => user registration/login front end <br/>
 - PORT 3002 => client user map front end <br/>
 if you have things running on those ports run the command to kill those local ports:
- <br/>
-
 ```
 npm run clear
 ```
-
 6. Run the command to concurrently run the application (frontend and backend):
 ```
 npm run dev

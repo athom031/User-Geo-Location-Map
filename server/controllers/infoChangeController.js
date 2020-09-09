@@ -34,44 +34,46 @@ module.exports.changePassword = (req, res, next) => {
     }); 
 }
 
-module.exports.changeAddress= async (req, res, next) => {
+module.exports.changeAddress= (req, res, next) => {
 
-    let data = await getCountry(req.body.address);
-    //call async function and only continue until returned promise is resolved
+    getCountry(req.body.address)
+        .then((message) => {
+            let data = JSON.parse(message);
 
-    if(data === 'err' || data.status != 'OK' || data.results[0].address_components.length < 7) {
-        // many things tested here: 
-            //incase there is error in promise
-            //search gets no results
-            //search results is too general
-        return res.status(422).json({ status: false, message: 'ERROR: Address Format Incorrect, ie: not specific enough' });
-    }
-    else {
-        let country = '';
-        data.results[0].address_components.forEach(elem => {
-            if(elem.types[0] === 'country') {
-                country = elem.long_name;
+            if(data.status != 'OK' || data.results[0].address_components.length < 7) {
+                res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);
             }
-        });
-        //get country field to check if in US (not always in same place (ie: apartment vs home))
-                
-        //set user location data
-        let address = data.results[0].formatted_address;
 
-        let latCoord = data.results[0].geometry.location.lat;
-        let lngCoord = data.results[0].geometry.location.lng;
-            
-        if(country != 'United States') {
-            return res.status(422).json({ status: false, message: 'ERROR: Address must be in the U.S.' }); //address check
-        }   
-        
-        User.updateOne({userName: req.body.userName}, { $set: { address: address, latCoord: latCoord, lngCoord: lngCoord } }, function(err, response) {
+
+            let country = '';
+            data.results[0].address_components.forEach(elem => {
+                if(elem.types[0] === 'country') {
+                    country = elem.long_name;
+                }
+            });
+            //get country field to check if in US (not always in same place (ie: apartment vs home))
+                    
+            //set user location data
+            let address = data.results[0].formatted_address;
+    
+            let latCoord = data.results[0].geometry.location.lat;
+            let lngCoord = data.results[0].geometry.location.lng;
+                
+            if(country != 'United States') {
+                return res.status(422).json({ status: false, message: 'ERROR: Address must be in the U.S.' }); //address check
+            }   
+
+            User.updateOne({userName: req.body.userName}, { $set: { address: address, latCoord: latCoord, lngCoord: lngCoord } }, function(err, response) {
                 if(err)
                     return res.status(400).json({ status: false, message: 'ERROR: Address Change Error'});
                 else if(response.n === 0)
                     return res.status(404).json({ status: false, message: 'ERROR: User not found' });
                 else 
                     return res.status(200).json({ status: true, message: `${req.body.userName}'s address has changed` });
-        });
-    } 
+            });
+        })
+        .catch((message) => {
+            console.log(message);
+            res.status(422).send(['ERROR: Server Error, please check Backend']);
+        }); 
 }
