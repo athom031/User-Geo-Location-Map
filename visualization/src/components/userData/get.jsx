@@ -1,30 +1,43 @@
+import { get } from 'lodash';
+
 const fetch = require('node-fetch');
 
 //server side posts all of the mongo db nodes, and now request from the front end
-const getData = async () => {
-    let url = 'http://localhost:3000/api/data';
-    try {
-        const response = await fetch(url);
-        if(response.ok) {
-            const jsonResponse = await response.json();
-            let arr = [];
-            
-            for(let i in jsonResponse) {
-                arr.push({
-                          fullName: jsonResponse[i].fullName,
-                          userName: jsonResponse[i].userName,
-                          latCoord: jsonResponse[i].latCoord,
-                          lngCoord: jsonResponse[i].lngCoord,
-                          online:   jsonResponse[i].online 
-                });
+const getData = () => {
+    return new Promise((resolve, reject) => {
+        let url = 'http://localhost:3000/api/data';
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", url);
+
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4 && xhr.status === 200) {
+                let data = JSON.parse(xhr.responseText);
+
+                let arr = [];
+                
+                for(let i in data) {
+                    arr.push({
+                            fullName: data[i].fullName,
+                            userName: data[i].userName,
+                            latCoord: data[i].latCoord,
+                            lngCoord: data[i].lngCoord,
+                            online:   data[i].online 
+                    });
+                }
+                
+                resolve(arr);
             }
-            
-            return arr;
+            else if(xhr.readyState === 4) {
+                reject('Request failed!');
+            }
         }
-        throw new Error('Request failed!');
-    } catch(error) {
-        console.log(error);
-    }  
+
+        xhr.send();
+    })
 }
 
 export default getData;
