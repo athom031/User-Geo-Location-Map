@@ -38,23 +38,20 @@ export class ChangePasswordForm extends React.Component {
             //create form variable to assign this.setState within xhr function call
             const form = this;
 
-            //open a connection
             xhr.open("POST", url, true);
         
-            //set request header (type of content being sent)
             xhr.setRequestHeader("Content-Type", "application/json");
         
-            //create state change callback
             xhr.onreadystatechange = function () {
                 if(xhr.readyState === 4 && xhr.status === 200) 
                     form.setState( { changeSuccess: true } )
-                else if(xhr.readyState === 4) //has some error state ie: 404 or 400 
+                else if(xhr.readyState === 4)
                     form.setState( { error: JSON.parse(this.responseText).message } )
             };
             
             xhr.send(data);
         }
-        event.preventDefault(); //stops html from refreshing if there is an error
+        event.preventDefault();
     }
 
     render() {
@@ -88,11 +85,21 @@ export class ChangePasswordForm extends React.Component {
                                         <form onSubmit={this.handleSubmit}>
                                             <div className="form-group">
                                                 <label>Password </label>
-                                                <input type='password' value = { password }  onChange = { this.handlePasswordChange } placeholder='Min-length: 6, 1 Capital, 1 Special' required />
+                                                < input type='password' 
+                                                  value = { password }  
+                                                  onChange = { this.handlePasswordChange } 
+                                                  placeholder='Min-length: 6, 1 Capital, 1 Special' 
+                                                  required 
+                                                />
                                             </div>
                                             <div className="form-group">
                                                 <label>Confirm Password</label>
-                                                <input type='password' value = { confPassword }  onChange = { this.handleConfPasswordChange } placeholder='Must Match Password' required />
+                                                < input type='password' 
+                                                  value = { confPassword }  
+                                                  onChange = { this.handleConfPasswordChange } 
+                                                  placeholder='Must Match Password' 
+                                                  required 
+                                                />
                                             </div>
                                             <div className="footer">
                                                 <button type="submit" className = "changebtn" >

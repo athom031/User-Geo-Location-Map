@@ -16,7 +16,6 @@ export class ChangeNameForm extends React.Component {
         }
     }
     
-    //Form Controlled Components, event is passed as param    
     handleFullnameChange = event => { this.setState( { fullName: event.target.value } ) }
     handleConfnameChange = event => { this.setState( { confName: event.target.value } ) }
     
@@ -34,13 +33,10 @@ export class ChangeNameForm extends React.Component {
             //create form variable to assign this.setState within xhr function call
             const form = this;
             
-            //open a connection
             xhr.open("POST", url, true);
         
-            //set request header (type of content being sent)
             xhr.setRequestHeader("Content-Type", "application/json");
         
-            //create state change callback
             xhr.onreadystatechange = function () {
                 if(xhr.readyState === 4 && xhr.status === 200)
                     form.setState( { changeSuccess: true } )
@@ -53,7 +49,7 @@ export class ChangeNameForm extends React.Component {
         else {
             this.setState( { error: 'ERROR: Names do not match' } )
         }
-        event.preventDefault(); //stops html from refreshing if there is an error
+        event.preventDefault();
     }
 
     render() {
@@ -86,11 +82,19 @@ export class ChangeNameForm extends React.Component {
                                     <form onSubmit={this.handleSubmit}>
                                         <div className="form-group">
                                             <label>Full Name</label>
-                                            <input type='text' value = { fullName }  onChange = { this.handleFullnameChange } placeholder='Full Name' required />
+                                            < input type='text' value = { fullName }  
+                                              onChange = { this.handleFullnameChange } 
+                                              placeholder='Full Name' 
+                                              required 
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <label>Confirm Name</label>
-                                            <input type='text' value = { confName }  onChange = { this.handleConfnameChange } placeholder='Confirm Name' required />
+                                            < input type='text' value = { confName }  
+                                              onChange = { this.handleConfnameChange } 
+                                              placeholder='Confirm Name' 
+                                              required 
+                                            />
                                         </div>
                                         <div className="footer">
                                             <button type="submit" className = "changebtn">

@@ -1,15 +1,14 @@
 import React from 'react';
 
-//helper functions
+//---------------- HELPER ----------------\\
 import submitHelper from './Helper/Register/submitHelper';
 import checkData from './Helper/Register/checkData';
 
-//svg files
+//---------------- SVG ----------------\\
 import user from './image_svg/register.svg';
 import success from './image_svg/success.svg';
 
-
-/*register form if right side is clicked will switch to login form */
+// register form if right side is clicked will switch to login form 
 export class Register extends React.Component {
     
     constructor(props) {
@@ -25,9 +24,7 @@ export class Register extends React.Component {
             regSuccess: false
         }
     }
-    
-    //Form Controlled Components    
-    //when handler is assigned to on change event, event itself is passed as param    
+       
     handleFullnameChange = event => { this.setState({ fullName: event.target.value }) }
     
     handleUsernameChange = event => { this.setState({ userName: event.target.value }) }
@@ -47,18 +44,10 @@ export class Register extends React.Component {
                                 });
         
         if(checkData(this, data)) {
-            //check data for matching passwords, password constraints
             submitHelper(this, data)
-                .then((message) => {
-                    console.log(message);
-                })
-                .catch((message) => {
-                    console.log(message);
-                });
-            
-            //username being in db/us address to be handled on server side
+                .then((message) => console.log(message))
+                .catch((message) => console.log(message));
         }
-        //stops page from refreshing, allows user to fix mistakes
         event.preventDefault();
     }
 
@@ -112,23 +101,47 @@ export class Register extends React.Component {
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label>Full Name</label>
-                                    <input type='text' value = { fullName }  onChange = { this.handleFullnameChange } placeholder='First and Last Name' required />
+                                    < input type='text' 
+                                      value = { fullName }  
+                                      onChange = { this.handleFullnameChange } 
+                                      placeholder='First and Last Name' 
+                                      required 
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Username</label>
-                                    <input type='text' value = { userName }  onChange = { this.handleUsernameChange } placeholder='Unique Username' required />
+                                    < input type='text' 
+                                      value = { userName }  
+                                      onChange = { this.handleUsernameChange } 
+                                      placeholder='Unique Username' 
+                                      required
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Address</label>
-                                    <input type='text' value = { address }  onChange = { this.handleAddressChange } placeholder = 'U.S. Address' required />
+                                    < input type='text' 
+                                      value = { address }  
+                                      onChange = { this.handleAddressChange } 
+                                      placeholder = 'U.S. Address' 
+                                      required 
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Password</label>
-                                    <input type='password' value = { password }  onChange = { this.handlePasswordChange } placeholder = 'Min-length: 6, 1 Capital, 1 Special' />
+                                    < input type='password' 
+                                      value = { password }  
+                                      onChange = { this.handlePasswordChange } 
+                                      placeholder = 'Min-length: 6, 1 Capital, 1 Special' 
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Confirm Password</label>
-                                    <input type='password' value = { confPassword }  onChange = { this.handleConfpasswordChange } placeholder = 'Must match password' required />
+                                    < input type='password' 
+                                      value = { confPassword }  
+                                      onChange = { this.handleConfpasswordChange } 
+                                      placeholder = 'Must match password' 
+                                      required 
+                                    />
                                 </div>
                                 <div className="footer">
                                     <button type="submit" className = "btn">

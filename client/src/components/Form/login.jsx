@@ -1,18 +1,18 @@
 import React from 'react';
 
-//helper functions
+//---------------- HELPER ----------------\\
 import logHelper from './Helper/Login/logHelper';
 import signoffHelper from './Helper/Login/signoffHelper';
 
-//svg files
+//---------------- SVG ----------------\\
 import user from './image_svg/login.svg';
 import success from './image_svg/signin.svg';
 
-//change files
+//---------------- CHANGE FORMS ----------------\\
 import { ChangeNameForm, ChangePasswordForm, ChangeAddressForm } from './Helper/Login/changeUserData';
 
 
-/*login form if right side is clicked will switch to register form */
+// login form if right side is clicked will switch to register form 
 export class Login extends React.Component {
     
     constructor(props) {
@@ -30,33 +30,27 @@ export class Login extends React.Component {
             changePassword: false
         }
     }
-    
-    //Form Controlled Components, event is passed as param    
+     
     handleUsernameChange = event => { this.setState( { userName: event.target.value } ) }
     handlePasswordChange = event => { this.setState( { password: event.target.value } ) }
     
-    handleSubmit = event => {    
+    handleSubmit = async event => {    
         var data = JSON.stringify( { "userName": this.state.userName, "password": this.state.password } );
         
         logHelper(this, data)
-            .then((message) => {
-                console.log(message);
-            })
-            .catch((message) => {
-                console.log(message);
-            });
+            .then((message) => console.log(message))
+            .catch((message) => console.log(message));
+
         event.preventDefault();
     }
 
-    signoff = event => {
+    signoff = async (event) => {
         var data = JSON.stringify( { "userName" : this.state.userName } );
+
         signoffHelper(data)
-            .then((message) => {
-                console.log(message);
-            })
-            .catch((message) => {
-                console.log(message);
-            });
+            .then((message) => console.log(message))
+            .catch((message) => console.log(message));
+            
         this.setState ({
             userName:       '',
             password:       '',
@@ -171,11 +165,21 @@ export class Login extends React.Component {
                             <form onSubmit={this.handleSubmit}>
                                 <div className="form-group">
                                     <label>Username</label>
-                                    <input type='text' value = { userName }  onChange = { this.handleUsernameChange } placeholder='Username' required />
+                                    < input type='text' 
+                                      value = { userName }  
+                                      onChange = { this.handleUsernameChange } 
+                                      placeholder='Username' 
+                                      required 
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Password</label>
-                                    <input type='password' value = { password }  onChange = { this.handlePasswordChange } placeholder = 'Password' required />
+                                    < input type='password' 
+                                      value = { password }  
+                                      onChange = { this.handlePasswordChange } 
+                                      placeholder = 'Password' 
+                                      required 
+                                    />
                                 </div>
                                 <div className="footer">
                                     <button type="submit" className = "btn">
