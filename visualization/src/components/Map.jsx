@@ -13,9 +13,9 @@ export class MapContainer extends Component {
         super(props);
         this.state = {
             coords:  [],
-            showingInfoWindow: false,  //Hides or the shows the infoWindow
-            activeMarker: {},          //Shows the active marker upon click
-            selectedPlace: {},         //Shows the infoWindow to the selected place upon a marker
+            showingInfoWindow: false,  //hides/shows infoWindow
+            activeMarker: {},          //shows active marker upon click
+            selectedPlace: {},         //shows infoWindow on selected marker
             field: null
         }
 
@@ -37,19 +37,18 @@ export class MapContainer extends Component {
         }
     };
 
-    setCoords = () => { 
-        getData()
-            .then((message) => {
-                this.setState({
-                    coords: message
-                });
-            })
-            .catch((message) => {
-                console.log(message);
-                this.setState({
-                    coords: []
-                });
+    setCoords = async () => { 
+        try {
+            let arr = await getData();
+            this.setState({
+                coords: arr
             });
+        } catch (err) {
+            console.log(err);
+            this.setState({ 
+                coords: []
+            })
+        }
     }
 
     displayMarkers = () => {

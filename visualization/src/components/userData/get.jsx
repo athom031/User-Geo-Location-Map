@@ -1,8 +1,4 @@
-import { get } from 'lodash';
-
-const fetch = require('node-fetch');
-
-//server side posts all of the mongo db nodes, and now request from the front end
+//front end requests server side posts of the mongo db nodes
 const getData = () => {
     return new Promise((resolve, reject) => {
         let url = 'http://localhost:3000/api/data';
