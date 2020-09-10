@@ -1,6 +1,4 @@
-/* sends sign off post call on server side and 
-   will turn user data to offline when log off btn is pressed */
-
+// sends sign off post call on server side and will turn user data to offline when log off btn is pressed
 function signoffHelper(data) {
     return new Promise((resolve, reject) => {
         //create xml http request object (xhr)

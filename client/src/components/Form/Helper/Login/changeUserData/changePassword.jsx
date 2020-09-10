@@ -3,7 +3,7 @@ import React from 'react';
 //svg files
 import change from '../../../image_svg/change.svg';
 
-/* Form to Change Password that is called from login.jsx after successful login */
+// Form to Change Password that is called from login.jsx after successful login 
 export class ChangePasswordForm extends React.Component {
     constructor(props) {
         super(props);
@@ -30,8 +30,8 @@ export class ChangePasswordForm extends React.Component {
 
             var data = JSON.stringify({ "userName": this.props.userName, "password": this.state.password });
         
-            //create xml http request object (xhr)
             let xhr  = new XMLHttpRequest();
+            
             //without http:// -> Access-Control-Allow-Origin error
             let url =  'http://localhost:3000/api/changePassword';
             

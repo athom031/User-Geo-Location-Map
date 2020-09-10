@@ -1,4 +1,4 @@
-/*takes register form data to register user on server side*/
+//takes register form data to register user on server side
 function submitHelper(form, data) {
     return new Promise((resolve, reject) => {
         //create xml http request object (xhr)

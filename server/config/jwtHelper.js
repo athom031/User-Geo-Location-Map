@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken'); //JWT
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 verifyJwtToken: (req, res, next) => {
@@ -6,11 +6,11 @@ verifyJwtToken: (req, res, next) => {
     if('authorization' in req.headers)
         //Authorization : Bearer [jwt] -> header request
         token = req.headers['authorization'].split(' ')[1];
-    if(!token) //if token wasn't set
+    if(!token)
         return res.status(403).send({ auth: false, message: 'No token provided.' });
     else {
-        jwt.verify(token, process.env.JWT_SECRET, //needed to decrypt
-            (err, decoded) => { //decoded will be the actual payload
+        jwt.verify(token, process.env.JWT_SECRET,
+            (err, decoded) => { //decode payload 
                 if(err)
                     return res.status(500).send({auth: false, message: 'Token authentication failed.' });
                 else {

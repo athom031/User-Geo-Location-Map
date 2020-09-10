@@ -1,6 +1,4 @@
-/*helper function called to check form input before 
-  continuing on to check server side validation*/
-
+//helper function called to check form input before continuing on to check server side validation
 function checkData(form, d) {
     let check = false;
 

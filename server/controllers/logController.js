@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 const User     = mongoose.model('User');
-const _        = require('lodash'); //allows to limit user info return from db
+const _        = require('lodash'); //limit user info return from db
 const passport = require('passport'); //login passport library
 
-module.exports.authenticate = (req, res, next) => { //post route function to send credentials for authentication
-    passport.authenticate('local', (err, user, info) => { //calls arrow function in passport config
+module.exports.authenticate = (req, res, next) => { 
+    passport.authenticate('local', (err, user, info) => { 
         if(err) 
-            return res.status(400).json(err); // passport middleware error
+            return res.status(400).json(err); //middleware err
         else if(user) 
-            return res.status(200).json({ "token" : user.generateJwt() }); //registered user
+            return res.status(200).json({ "token" : user.generateJwt() }); //success register
         else 
-            return res.status(404).json(info); //unkown user or incorrect password entered 
+            return res.status(404).json(info); //user or password error 
     })(req, res);
 }
     

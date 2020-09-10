@@ -3,7 +3,7 @@ import React from 'react';
 //svg files
 import change from '../../../image_svg/change.svg';
 
-/* Form to Change Name that is called from login.jsx after successful login */
+// Form to Change Name that is called from login.jsx after successful login
 export class ChangeNameForm extends React.Component {
     constructor(props) {
         super(props);
@@ -26,8 +26,8 @@ export class ChangeNameForm extends React.Component {
 
             var data = JSON.stringify( { "userName": this.props.userName, "fullName": this.state.fullName } );
         
-            //create xml http request object (xhr)
             let xhr  = new XMLHttpRequest();
+            
             //without http:// -> Access-Control-Allow-Origin error
             let url =  'http://localhost:3000/api/changeName';
             

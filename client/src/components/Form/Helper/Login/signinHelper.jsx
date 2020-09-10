@@ -1,5 +1,4 @@
-/* sends sign in post call on server side to turn user to online
-   after successful authentication from login helper*/
+// sends sign in post call on server side to turn user to online after successful authentication from login helper
 function signinHelper(form, d) {
     return new Promise((resolve, reject) => {
         var data = JSON.stringify( { "userName": JSON.parse(d).userName } );

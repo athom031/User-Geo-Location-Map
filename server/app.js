@@ -1,12 +1,10 @@
-//export/import not default in node js so use module.exports/require
-
 //config env variable
 require('./config/config'); 
 
 //connect to mongo db
 require('./models/db'); 
 
-//we are using passport for our login authentication
+//login authentication
 require('./config/passportConfig'); 
 
 //express server -> create middleware app

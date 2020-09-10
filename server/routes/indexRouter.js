@@ -1,9 +1,9 @@
-const express = require('express');
-const router = express.Router();
+const express   = require('express');
+const router    = express.Router();
 
-const ctrlUser = require('../controllers/userController');
-const postUser = require('../controllers/infoChangeController');
-const signUser = require('../controllers/logController');
+const ctrlUser  = require('../controllers/userController');
+const postUser  = require('../controllers/infoChangeController');
+const signUser  = require('../controllers/logController');
 
 const jwtHelper = require('../config/jwtHelper');
 

@@ -1,9 +1,10 @@
 const mongoose       = require('mongoose');
 const User           = mongoose.model('User');
 
-//call coun
 const { getCountry } = require('../services/loc-service');
-//needed to encrypt password and keep secret in database
+
+const fetch          = require('node-fetch');
+
 const bcrypt         = require('bcryptjs');
 
 module.exports.changeName = (req, res, next) => {
@@ -34,46 +35,48 @@ module.exports.changePassword = (req, res, next) => {
     }); 
 }
 
-module.exports.changeAddress= (req, res, next) => {
+module.exports.changeAddress = async (req, res, next) => {
+    let data;
+    try {
+        data = await getCountry(req.body.address);
+    } catch(err) {
+        console.log(err);
+        res.status(422).send(['ERROR: Server Error, please check Backend']);
+    }
 
-    getCountry(req.body.address)
-        .then((message) => {
-            let data = JSON.parse(message);
-
-            if(data.status != 'OK' || data.results[0].address_components.length < 7) {
-                res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);
-            }
-
-
-            let country = '';
-            data.results[0].address_components.forEach(elem => {
-                if(elem.types[0] === 'country') {
-                    country = elem.long_name;
-                }
-            });
-            //get country field to check if in US (not always in same place (ie: apartment vs home))
-                    
-            //set user location data
-            let address = data.results[0].formatted_address;
+    if(data === 'err') res.status(422).send(['ERROR: Server Error, please check Backend']);
     
-            let latCoord = data.results[0].geometry.location.lat;
-            let lngCoord = data.results[0].geometry.location.lng;
-                
-            if(country != 'United States') {
-                return res.status(422).json({ status: false, message: 'ERROR: Address must be in the U.S.' }); //address check
-            }   
+    data = JSON.parse(data);
+    
+    if(data.status != 'OK' || data.results[0].address_components.length < 7) {
+        res.status(422).send(['ERROR: Address Format Incorrect, ie: not specific enough']);
+    }
 
-            User.updateOne({userName: req.body.userName}, { $set: { address: address, latCoord: latCoord, lngCoord: lngCoord } }, function(err, response) {
-                if(err)
-                    return res.status(400).json({ status: false, message: 'ERROR: Address Change Error'});
-                else if(response.n === 0)
-                    return res.status(404).json({ status: false, message: 'ERROR: User not found' });
-                else 
-                    return res.status(200).json({ status: true, message: `${req.body.userName}'s address has changed` });
-            });
-        })
-        .catch((message) => {
-            console.log(message);
-            res.status(422).send(['ERROR: Server Error, please check Backend']);
-        }); 
+    let country = '';
+    
+    data.results[0].address_components.forEach(elem => {
+        if(elem.types[0] === 'country') {
+            country = elem.long_name;
+        }
+    });
+    //get country field to check if in US (not always in same place (ie: apartment vs home))
+                    
+    //set user location data
+    let address = data.results[0].formatted_address;
+
+    let latCoord = data.results[0].geometry.location.lat;
+    let lngCoord = data.results[0].geometry.location.lng;
+        
+    if(country != 'United States') {
+        return res.status(422).json({ status: false, message: 'ERROR: Address must be in the U.S.' }); 
+    }   
+
+    User.updateOne({userName: req.body.userName}, { $set: { address: address, latCoord: latCoord, lngCoord: lngCoord } }, function(err, response) {
+        if(err)
+            return res.status(400).json({ status: false, message: 'ERROR: Address Change Error'});
+        else if(response.n === 0)
+            return res.status(404).json({ status: false, message: 'ERROR: User not found' });
+        else 
+            return res.status(200).json({ status: true, message: `${req.body.userName}'s address has changed` });
+    });
 }

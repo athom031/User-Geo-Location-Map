@@ -1,6 +1,6 @@
 import signinHelper from './signinHelper';
 
-/* sends authenticate post call on server side */
+// sends authenticate post call on server side
 function logHelper(form, data) {
     return new Promise((resolve, reject) => {
         //create xml http request object (xhr)

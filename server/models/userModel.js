@@ -1,14 +1,13 @@
-//create mongoose model for users data in mongo db
+//mongoose model
 const mongoose = require('mongoose'); 
 
-//needed to encrypt password and keep secret in database
+//encrypt password
 const bcrypt = require('bcryptjs');
 
-//JSON web token for user
+//tokenize user data
 const jwt = require('jsonwebtoken');  
 
 var userSchema = new mongoose.Schema({
-    //none are optional -> data must be inputed
     fullName: {
         //Name doesn't have to follow any convention (first name/last name etc)
         type: String,
@@ -38,13 +37,11 @@ var userSchema = new mongoose.Schema({
     lngCoord: Number
 });
 
-
-//validation for password specifications other than minLength
 userSchema.path('password').validate((val) => {
     return (val.toLowerCase() === val || /^[a-zA-Z]+$/.test(val)) ? false : true;
 }, 'Password must have atleast 1 uppercase letter and 1 non-letter');
 
-//pre-event from bcrypt - invoked before save operation and generates saltSecretet in User
+//pre-event from bcrypt - encrypt password in db
 userSchema.pre('save', function (next) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (err, hash) => {
@@ -55,21 +52,18 @@ userSchema.pre('save', function (next) {
     });    
 });
  
-//methods for login authentication used in passport config
 userSchema.methods.verifyPassword = function(password) {
-     //bcrypt function to compare db encrypted password with typed base password
-     return bcrypt.compareSync(password, this.password); //returns boolean
+     return bcrypt.compareSync(password, this.password);
 };
 
 userSchema.methods.generateJwt = function() {
-    return jwt.sign({ _id: this._id}, //pass information for payload (id is part of mongodb deafult info)
-        process.env.JWT_SECRET, //secret code defined in json config
+    return jwt.sign({ _id: this._id}, 
+        process.env.JWT_SECRET, 
         {
-           expiresIn: process.env.JWT_EXP  //passes '2m' string to define expire time
+           expiresIn: process.env.JWT_EXP 
         });
 }
 
-//created 'User' mongoose model
 const UserData = mongoose.model('User', userSchema);
 
 module.exports = UserData;
