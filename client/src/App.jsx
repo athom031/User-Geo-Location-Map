@@ -47,7 +47,7 @@ class App extends React.Component {
       </div>
     )
   }
-};
+}
 
 //the box to click that switches between login and register
 const RightSide = props => {

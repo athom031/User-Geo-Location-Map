@@ -48,7 +48,13 @@ export class Register extends React.Component {
         
         if(checkData(this, data)) {
             //check data for matching passwords, password constraints
-            submitHelper(this, data);
+            submitHelper(this, data)
+                .then((message) => {
+                    console.log(message);
+                })
+                .catch((message) => {
+                    console.log(message);
+                });
             
             //username being in db/us address to be handled on server side
         }

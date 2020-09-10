@@ -38,13 +38,25 @@ export class Login extends React.Component {
     handleSubmit = event => {    
         var data = JSON.stringify( { "userName": this.state.userName, "password": this.state.password } );
         
-        logHelper(this, data);
+        logHelper(this, data)
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((message) => {
+                console.log(message);
+            });
         event.preventDefault();
     }
 
     signoff = event => {
         var data = JSON.stringify( { "userName" : this.state.userName } );
-        signoffHelper(data);
+        signoffHelper(data)
+            .then((message) => {
+                console.log(message);
+            })
+            .catch((message) => {
+                console.log(message);
+            });
         this.setState ({
             userName:       '',
             password:       '',
