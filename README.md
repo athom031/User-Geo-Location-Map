@@ -1,4 +1,4 @@
-# User Localization Visualization Tool
+# User Geo Location Map
 
 This project is to create a visual map of users which includes:
 1) Web page where users can register with their information (username, name, password, US address).
